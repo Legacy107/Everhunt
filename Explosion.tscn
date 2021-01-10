@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Explosion_particle.gd" type="Script" id=1]
+[ext_resource path="res://Assets/explosion-6.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 90, 20 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.00344828, 0.711409, 1 )
+colors = PoolColorArray( 0.96875, 0.178507, 0.0491943, 1, 0.996094, 0.780144, 0.132294, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.769968, 0.329545 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+lifetime_randomness = 0.45
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 160.0
+flatness = 1.0
+gravity = Vector3( 0, 50, 0 )
+initial_velocity = 120.0
+initial_velocity_random = 0.1
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -30.0
+linear_accel_random = 0.2
+scale = 0.8
+scale_random = 0.5
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+anim_speed = 1.0
+
+[node name="Explosion" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 20 )
+shape = SubResource( 1 )
+
+[node name="Explosion_particle" type="Particles2D" parent="."]
+material = SubResource( 2 )
+emitting = false
+amount = 30
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.8
+randomness = 0.3
+process_material = SubResource( 7 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+[connection signal="body_entered" from="." to="Explosion_particle" method="_on_Explosion_body_entered"]
