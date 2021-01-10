@@ -1,2 +1,2 @@
-# 3D-Teris
-3D Tetris made in Godot
+# Platformer Battleground
+2D Battleground game made in Godot
