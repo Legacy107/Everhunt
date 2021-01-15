@@ -25,15 +25,15 @@ func _physics_process(delta):
 	if Input.is_action_pressed("down"):
 		y_velo = MAX_FALL_SPEED
 	
-	move_and_slide(Vector2(move_dir * MOVE_SPEED + x_velo, y_velo), Vector2(0, -1))
+	move_and_slide(Vector2(clamp(move_dir * MOVE_SPEED + x_velo, -MAX_MOVE_SPEED, MAX_MOVE_SPEED), y_velo), Vector2(0, -1))
 	
 	var grounded = is_on_floor()
 	var hit_ceiling = is_on_ceiling()
-	var wall_climb = !grounded && y_velo>0 && is_on_wall() && (Input.is_action_pressed("right") || Input.is_action_pressed("left"))
+	var wall_climb = !grounded && y_velo>-300 && is_on_wall() && (Input.is_action_pressed("right") || Input.is_action_pressed("left"))
 	if wall_climb:
 		wall_climb_debounce.start()
 	var enable_wall_jump = wall_climb_debounce.time_left > 0
-	if grounded:
+	if grounded or wall_climb:
 		double_jump = true
 	
 	y_velo += GRAVITY

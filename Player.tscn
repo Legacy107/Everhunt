@@ -1,81 +1,129 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://platformer_char_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Main Characters/Ninja Frog/Sprite sheet.png" type="Texture" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23.9956, 24 )
+extents = Vector2( 10.8765, 12.6543 )
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 13.7147
+[sub_resource type="Animation" id=2]
+resource_name = "Double jump"
+length = 0.25
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 150, 32, 32 ), Rect2( 32, 150, 32, 32 ), Rect2( 64, 150, 32, 32 ), Rect2( 96, 150, 32, 32 ), Rect2( 128, 150, 32, 32 ), Rect2( 160, 150, 32, 32 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Idle_Sprite:region_rect")
+tracks/0/path = NodePath("Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.101, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Rect2( 0, 0, 32, 32 ), Rect2( 32, 0, 32, 32 ), Rect2( 0, 64, 64, 64 ), Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ), Rect2( 128, 0, 32, 32 ), Rect2( 160, 0, 32, 32 ), Rect2( 192, 0, 32, 32 ), Rect2( 224, 0, 32, 32 ), Rect2( 256, 0, 32, 32 ), Rect2( 288, 0, 32, 32 ), Rect2( 320, 0, 32, 32 ) ]
+"values": [ Rect2( 32, 76, 32, 32 ) ]
 }
 
 [sub_resource type="Animation" id=4]
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Jump_Sprite:region_rect")
+tracks/0/path = NodePath("Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 0,
-"values": [  ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 32, 32 ), Rect2( 32, 0, 32, 32 ), Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ), Rect2( 128, 0, 32, 32 ), Rect2( 160, 0, 32, 32 ), Rect2( 192, 0, 32, 32 ), Rect2( 224, 0, 32, 32 ), Rect2( 256, 0, 32, 32 ), Rect2( 288, 0, 32, 32 ), Rect2( 320, 0, 32, 32 ) ]
 }
 
 [sub_resource type="Animation" id=5]
-length = 1.1
-loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Walk_Sprite:region_rect")
+tracks/0/path = NodePath("Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Rect2( 0, 0, 32, 32 ), Rect2( 32, 0, 32, 32 ), Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ), Rect2( 128, 0, 32, 32 ), Rect2( 160, 0, 32, 32 ), Rect2( 192, 0, 32, 32 ), Rect2( 224, 0, 32, 32 ), Rect2( 256, 0, 32, 32 ), Rect2( 288, 0, 32, 32 ), Rect2( 320, 0, 32, 32 ), Rect2( 352, 0, 32, 32 ) ]
+"values": [ Rect2( 0, 76, 32, 32 ) ]
 }
 
-[node name="Player" type="KinematicBody2D"]
-script = ExtResource( 1 )
+[sub_resource type="Animation" id=6]
+length = 0.55
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 38, 32, 32 ), Rect2( 32, 38, 32, 32 ), Rect2( 64, 38, 32, 32 ), Rect2( 96, 38, 32, 32 ), Rect2( 128, 38, 32, 32 ), Rect2( 160, 38, 32, 32 ), Rect2( 192, 38, 32, 32 ), Rect2( 224, 38, 32, 32 ), Rect2( 256, 38, 32, 32 ), Rect2( 288, 38, 32, 32 ), Rect2( 320, 38, 32, 32 ), Rect2( 352, 38, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 112, 32, 32 ), Rect2( 32, 112, 32, 32 ), Rect2( 64, 112, 32, 32 ), Rect2( 96, 112, 32, 32 ) ]
+}
+
+[node name="Player2" type="KinematicBody2D"]
+script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -5 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 11.8915 )
-shape = SubResource( 2 )
-
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -2.13082, -8.14894 )
-texture = ExtResource( 2 )
+position = Vector2( 0, -7.65838 )
+texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 64 )
+region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle = SubResource( 3 )
-anims/jump = SubResource( 4 )
-anims/walk = SubResource( 5 )
+"anims/Double jump" = SubResource( 2 )
+anims/Fall = SubResource( 3 )
+anims/Idle = SubResource( 4 )
+anims/Jump = SubResource( 5 )
+anims/Walk = SubResource( 6 )
+"anims/Wall climb" = SubResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 smoothing_speed = 10.0
 
