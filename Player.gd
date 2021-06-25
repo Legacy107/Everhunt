@@ -9,7 +9,10 @@ const MAX_MOVE_SPEED = 600
 
 onready var anim_player = $AnimationPlayer
 onready var sprite = $Sprite
+onready var Hand = $Hand
+onready var Trajectory = $Trajectory
 onready var wall_climb_debounce = $WallClimbDebounce
+var Bullet = preload("res://bullet.tscn")
 
 var y_velo = 0
 var x_velo = 0
@@ -18,18 +21,33 @@ var double_jump = true
 
 func _physics_process(delta):
 	var move_dir = 0
+	
+	# USER INPUT
 	if Input.is_action_pressed("right"):
 		move_dir += 1
 	if Input.is_action_pressed("left"):
 		move_dir -= 1
 	if Input.is_action_pressed("down"):
 		y_velo = MAX_FALL_SPEED
-	
-	move_and_slide(Vector2(clamp(move_dir * MOVE_SPEED + x_velo, -MAX_MOVE_SPEED, MAX_MOVE_SPEED), y_velo), Vector2(0, -1))
+		
+	var x_speed = move_dir * MOVE_SPEED + x_velo
+	if x_speed < 0:
+		x_speed = max(x_speed, -MAX_MOVE_SPEED)
+	else:
+		x_speed = min(x_speed, MAX_MOVE_SPEED)
+		
+	move_and_slide(Vector2(x_speed, y_velo), Vector2(0, -1))
 	
 	var grounded = is_on_floor()
 	var hit_ceiling = is_on_ceiling()
-	var wall_climb = !grounded && y_velo>-300 && is_on_wall() && (Input.is_action_pressed("right") || Input.is_action_pressed("left"))
+	var wall_climb = (
+		!grounded && 
+		y_velo>-300 && 
+		is_on_wall() && (
+			Input.is_action_pressed("right") || 
+			Input.is_action_pressed("left")
+		)
+	)
 	if wall_climb:
 		wall_climb_debounce.start()
 	var enable_wall_jump = wall_climb_debounce.time_left > 0
@@ -86,8 +104,22 @@ func _physics_process(delta):
 func flip():
 	facing_right = !facing_right
 	sprite.flip_h = !sprite.flip_h
+	Hand.position.x *= -1
 
 func play_anim(anim_name):
 	if anim_player.is_playing() and anim_player.current_animation == anim_name:
 		return
 	anim_player.play(anim_name)
+
+func _input(event):
+	var just_pressed = event.is_pressed() and not event.is_echo()
+	if event.is_action_pressed("shoot") and just_pressed:
+		shoot((get_global_mouse_position() - Hand.global_position).normalized())
+	if event.is_action_pressed("ability_1") and just_pressed:
+		Trajectory.toggle()
+
+func shoot(direction):
+	var b = Bullet.instance()
+	owner.add_child(b)
+	b.transform = Hand.global_transform
+	b.direction = direction
