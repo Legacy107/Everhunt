@@ -17,7 +17,7 @@ Installation
 
 .. code:: sh
 
-    $ git clone github.com/Legacy107/Platformer-Battleground.git
+    $ git clone github.com/Legacy107/Everhunt.git
 
 - Web
 - Mobile
@@ -26,8 +26,8 @@ Installation
 Contribute
 ----------
 
-- `Issue Tracker <https://github.com/Legacy107/Platformer-Battleground/issues/>`_ 
-- `Source Code <https://github.com/Legacy107/Platformer-Battleground/>`_
+- `Issue Tracker <https://github.com/Legacy107/Everhunt/issues/>`_ 
+- `Source Code <https://github.com/Legacy107/Everhunt/>`_
 - Check out :doc:`guidelines` before making contribution
 
 Support

@@ -183,7 +183,7 @@ Some examples of good commit messages:
 Pull request
 ^^^^^^^^^^^^
 
-Open a pull request at `PR <https://github.com/Legacy107/Platformer-Battleground/pulls/>`_
+Open a pull request at `PR <https://github.com/Legacy107/Everhunt/pulls/>`_
 
 All pull requests must follow the below format:
 
