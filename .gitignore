@@ -11,3 +11,6 @@ data_*/
 # Addon
 addons/
 .github/
+
+# Build
+docs/_build
