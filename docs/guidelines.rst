@@ -39,10 +39,10 @@ Code structure
         Containing file and directory that is ignored by git.
 
     LINSENCE.md : file
-        Containing lincense details of the game.
+        Containing license details of the game.
 
     README.rst : file
-        Containing general infomation about the game.
+        Containing general information about the game.
 
     addons : folder
         Containing Godot plugins.
@@ -54,7 +54,7 @@ Code structure
         Containing images that are not sprites such as logo, thumbnail, cover, etc.
     
     sfx : folder
-        Containing sounds and musics file.
+        Containing sounds and music files.
 
     sprites : folder
         Containing game sprites.
@@ -63,7 +63,7 @@ Code structure
         Containing documentation files.
     
     src : folder
-        Containing soucrce code including scripts and scenes.
+        Containing source code including scripts and scenes.
 
     main.tscn : file
         The master scene. In charge of switching between different scenes.
@@ -76,7 +76,7 @@ Code structure
         Containing all primary scenes such as HUD and match maps.
 
     scripts : folder
-        Containing scritps controlling player, abilities, game logic, networking, etc.
+        Containing scripts controlling player, abilities, game logic, networking, etc.
 
     utils : folder
         Containing helper scripts and scenes shared between multiple components.
@@ -191,20 +191,20 @@ All pull requests must follow the below format:
         Title of the pull request must be short and start with the task or issue code
         (EH-x for task, #x for issue).
 
-    :Descirption:
-        Describe all changes that have been done in bullet list.
+    :Description:
+        Describe all changes that have been done in the bullet list.
         Include screenshots and issue references if needed.
 
     :Tag:
-        Attach appropriate tag to the pull request from the tags list.
+        Attach the appropriate tag to the pull request from the tags list.
 
     :Review:
-        All pull requests to merge into main branch need at least 1 review.
-        Remember to request reviewers when create a new pull request.
+        All pull requests to merge into the main branch need at least 1 review.
+        Remember to request reviewers when creating a new pull request.
 
 .. note::
 
-    Pull request should be squashed before being merged so that the project’s history stays easy to browse.
+    Pull requests should be squashed before being merged so that the project’s history stays easy to browse.
 
 
 --------------------
@@ -214,3 +214,5 @@ Art style
 ---------
 
 **TODO**
+
+
