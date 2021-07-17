@@ -1,14 +1,14 @@
 Overview
 ========
 
-:doc:`Everhunt </readme>` is a multiplayer 2D platformer battleground game made in Godot game engine.
+:doc:`Everhunt </readme>` is a 2D multiplayer platformer battleground game made in the Godot game engine.
 
 Gameplay
 --------
 
-- Teambase 3vs3 game
-- Each game is refresh with different combination of gamemodes
-- Endless posibility to customize your playstyle through ability system
+- Team-based 3v3 game
+- Each game is refreshing with different combinations of gamemodes
+- Endless possibility to customize your playstyle through an ability system
 
 Installation
 ------------
