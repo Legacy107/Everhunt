@@ -1,7 +1,7 @@
 Guidelines
 ==========
 
-This is the general guideline for contributing to :doc:`Everhunt <readme>` project.
+This is the general guideline for contributing to the :doc:`Everhunt <readme>` project.
 
 .. contents:: Table of Contents
 
@@ -16,7 +16,7 @@ Code structure
 
     root
     │    :term:`.gitignore`
-    │    :term:`LINSENCE.md`
+    │    :term:`LICENSE.md`
     │    :term:`README.rst`
     │
     ├─── :term:`addons`
@@ -36,9 +36,9 @@ Code structure
 .. glossary::
 
     .gitignore : file
-        Containing file and directory that is ignored by git.
+        Containing files and directories ignored by git.
 
-    LINSENCE.md : file
+    LICENSE.md : file
         Containing license details of the game.
 
     README.rst : file
@@ -51,10 +51,10 @@ Code structure
         Containing assets including images, sprites, sfx.
 
     images : folder
-        Containing images that are not sprites such as logo, thumbnail, cover, etc.
+        Containing images that are not sprites such as logos, thumbnails, covers, etc.
     
     sfx : folder
-        Containing sounds and music files.
+        Containing sound and music files.
 
     sprites : folder
         Containing game sprites.
@@ -73,10 +73,10 @@ Code structure
         to abilities, particles, etc.
 
     scenes : folder
-        Containing all primary scenes such as HUD and match maps.
+        Containing all primary scenes such as the HUD and match maps.
 
     scripts : folder
-        Containing scripts controlling player, abilities, game logic, networking, etc.
+        Containing scripts controlling player, abilities, game logics, networking, etc.
 
     utils : folder
         Containing helper scripts and scenes shared between multiple components.
@@ -192,7 +192,7 @@ All pull requests must follow the below format:
         (EH-x for task, #x for issue).
 
     :Description:
-        Describe all changes that have been done in the bullet list.
+        Describe all changes that have been done in bullet list.
         Include screenshots and issue references if needed.
 
     :Tag:
