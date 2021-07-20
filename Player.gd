@@ -13,7 +13,9 @@ onready var Hand = $Hand
 onready var Trajectory = $Trajectory
 onready var wall_climb_debounce = $WallClimbDebounce
 var Bullet = preload("res://bullet.tscn")
+var Homing_missile = preload("res://homing_missile.tscn")
 
+var Ability = Bullet
 var y_velo = 0
 var x_velo = 0
 var facing_right = true
@@ -113,13 +115,15 @@ func play_anim(anim_name):
 
 func _input(event):
 	var just_pressed = event.is_pressed() and not event.is_echo()
-	if event.is_action_pressed("shoot") and just_pressed:
-		shoot((get_global_mouse_position() - Hand.global_position).normalized())
+	if event.is_action_pressed("activate") and just_pressed:
+		activate_ability()
 	if event.is_action_pressed("ability_1") and just_pressed:
-		Trajectory.toggle()
+		Ability = Bullet
+	if event.is_action_pressed("ability_2") and just_pressed:
+		Ability = Homing_missile
 
-func shoot(direction):
-	var b = Bullet.instance()
-	owner.add_child(b)
-	b.transform = Hand.global_transform
-	b.direction = direction
+func activate_ability():
+	var direction = (get_global_mouse_position() - Hand.global_position).normalized()
+	var AbilityEntity = Ability.instance()
+	owner.add_child(AbilityEntity)
+	AbilityEntity.setup(Hand, direction)

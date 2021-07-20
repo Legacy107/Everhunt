@@ -11,6 +11,7 @@ data_*/
 # Addon
 addons/
 .github/
+.vscode/
 
 # Build
 docs/_build
