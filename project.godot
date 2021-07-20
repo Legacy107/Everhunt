@@ -39,8 +39,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Platformer Battleground"
-run/main_scene="res://World.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://src/scenes/World.tscn"
+config/icon="res://assets/images/icon.png"
 
 [autoload]
 
@@ -97,4 +97,4 @@ ability_2={
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://assets/tileset/default_env.tres"
