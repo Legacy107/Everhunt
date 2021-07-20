@@ -1,7 +1,7 @@
 Guidelines
 ==========
 
-This is the general guideline for contributing to :doc:`Everhunt </readme>` project.
+This is the general guideline for contributing to :doc:`Everhunt <readme>` project.
 
 .. contents:: Table of Contents
 
@@ -92,7 +92,7 @@ Naming convention
 ^^^^^^^^^^^^^^^^^
 
 Checkout out GDscript
-`naming convention </https://docs.godotengine.org/en/stable/tutorials/shading/godot_shader_language_style_guide.html#naming-conventions>`_.
+`naming convention <https://docs.godotengine.org/en/stable/tutorials/shading/godot_shader_language_style_guide.html#naming-conventions>`_.
 
 In short:
 
@@ -104,9 +104,9 @@ Design pattern
 ^^^^^^^^^^^^^^
 
 Check out some design patterns provided by **GDQuest**
-`here </https://www.gdquest.com/tutorial/godot/design-patterns/intro-to-design-patterns/>`_.
+`here <https://www.gdquest.com/tutorial/godot/design-patterns/intro-to-design-patterns/>`_.
 Pay special attention to the
-`Finite state machine pattern </https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/>`_.
+`Finite state machine pattern <https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/>`_.
 
 
 --------------------
