@@ -39,8 +39,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Platformer Battleground"
-run/main_scene="res://World.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://src/scenes/World.tscn"
+config/icon="res://assets/images/icon.png"
 
 [autoload]
 
@@ -79,7 +79,7 @@ right={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
-shoot={
+activate={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
@@ -97,4 +97,4 @@ ability_2={
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://assets/tileset/default_env.tres"

@@ -1,0 +1,148 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/sprites/Main Characters/Ninja Frog/Sprite sheet.png" type="Texture" id=1]
+[ext_resource path="res://src/scripts/trajectory.gd" type="Script" id=2]
+[ext_resource path="res://src/scripts/Player.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 10.508
+height = 3.606
+
+[sub_resource type="Animation" id=2]
+resource_name = "Double jump"
+length = 0.25
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 150, 32, 32 ), Rect2( 32, 150, 32, 32 ), Rect2( 64, 150, 32, 32 ), Rect2( 96, 150, 32, 32 ), Rect2( 128, 150, 32, 32 ), Rect2( 160, 150, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 32, 76, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 32, 32 ), Rect2( 32, 0, 32, 32 ), Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ), Rect2( 128, 0, 32, 32 ), Rect2( 160, 0, 32, 32 ), Rect2( 192, 0, 32, 32 ), Rect2( 224, 0, 32, 32 ), Rect2( 256, 0, 32, 32 ), Rect2( 288, 0, 32, 32 ), Rect2( 320, 0, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 76, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.55
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 38, 32, 32 ), Rect2( 32, 38, 32, 32 ), Rect2( 64, 38, 32, 32 ), Rect2( 96, 38, 32, 32 ), Rect2( 128, 38, 32, 32 ), Rect2( 160, 38, 32, 32 ), Rect2( 192, 38, 32, 32 ), Rect2( 224, 38, 32, 32 ), Rect2( 256, 38, 32, 32 ), Rect2( 288, 38, 32, 32 ), Rect2( 320, 38, 32, 32 ), Rect2( 352, 38, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 112, 32, 32 ), Rect2( 32, 112, 32, 32 ), Rect2( 64, 112, 32, 32 ), Rect2( 96, 112, 32, 32 ) ]
+}
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.512, 1 )
+colors = PoolColorArray( 0.372549, 0.164706, 0.835294, 0.501961, 0.184314, 0.698039, 0.8, 0.501961, 0.87451, 0.952941, 0.968627, 0.501961 )
+
+[node name="Player2" type="KinematicBody2D"]
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -7.65838 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -4.25 )
+shape = SubResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Double jump" = SubResource( 2 )
+anims/Fall = SubResource( 3 )
+anims/Idle = SubResource( 4 )
+anims/Jump = SubResource( 5 )
+anims/Walk = SubResource( 6 )
+"anims/Wall climb" = SubResource( 7 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+smoothing_speed = 10.0
+
+[node name="WallClimbDebounce" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Hand" type="Position2D" parent="."]
+position = Vector2( 11.2568, 1.98649 )
+
+[node name="Trajectory" type="Line2D" parent="."]
+width = 5.0
+gradient = SubResource( 8 )
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource( 2 )
