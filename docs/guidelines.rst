@@ -18,12 +18,15 @@ Code structure
     │    :term:`.gitignore`
     │    :term:`LICENSE.md`
     │    :term:`README.rst`
+    |    :term:`project.godot`
     │
     ├─── :term:`addons`
     ├─── :term:`assets`
     │   ├─── :term:`images`
     │   ├─── :term:`sfx`
-    │   └─── :term:`sprites`
+    │   ├─── :term:`sprites`
+    │   └─── :term:`tileset`
+    |
     ├─── :term:`docs`
     └─── :term:`src`
         │    :term:`main.tscn`
@@ -44,6 +47,9 @@ Code structure
     README.rst : file
         Containing general information about the game.
 
+    project.godot : file
+        Project settings.
+
     addons : folder
         Containing Godot plugins.
 
@@ -58,6 +64,9 @@ Code structure
 
     sprites : folder
         Containing game sprites.
+
+    tileset : folder
+        Containing files relating to tileset such as .tres files.
 
     docs : folder
         Containing documentation files.
