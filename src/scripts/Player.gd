@@ -1,58 +1,92 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 500
-const JUMP_FORCE = 1000
-const GRAVITY = 50
-const FRICTION = 100
-const MAX_FALL_SPEED = 1000
-const MAX_MOVE_SPEED = 600
 
-onready var anim_player = $AnimationPlayer
-onready var sprite = $Sprite
+var MOVE_SPEED = 400
+var MAX_MOVE_SPEED = 600
+var JUMP_FORCE = 800
+var MAX_FALL_SPEED = 800
+var GRAVITY = 50
+var FRICTION = 100
+var LENGTH = 50
+
+
+onready var Spr = $Sprite
+onready var AnimPlayer = $AnimationPlayer
+onready var Cam = $Camera2D
+onready var WallClimbDebounce = $WallClimbDebounce
 onready var Hand = $Hand
 onready var Trajectory = $Trajectory
-onready var wall_climb_debounce = $WallClimbDebounce
-var Bullet = preload("res://src/components/bullet.tscn")
-var Homing_missile = preload("res://src/components/homing_missile.tscn")
+onready var Mouse = get_parent().get_node("Mouse")
 
-var Ability = Bullet
+
 var y_velo = 0
 var x_velo = 0
 var facing_right = true
 var double_jump = true
 
-func _physics_process(delta):
+
+onready var player_state = {
+	"name" : name,
+	"pos" : position,
+	"flip" : Spr.flip_h,
+	"hand_pos" : Hand.position.x,
+	"anim" : "Idle",
+	"dir" : (get_local_mouse_position() - Hand.position).normalized(),
+	"ability" : "Bullet",
+	"mouse_name" : Mouse.name,
+	"mouse_pos" : Mouse.position
+}
+
+
+func _ready():
+	if !is_network_master():
+		Trajectory.hide()
+	else:
+		Cam.current = true
+		z_index = 2
+
+
+func _physics_process(_delta):
+	if !is_network_master():
+		return
+	
 	var move_dir = 0
 	
-	# USER INPUT
 	if Input.is_action_pressed("right"):
 		move_dir += 1
 	if Input.is_action_pressed("left"):
 		move_dir -= 1
 	if Input.is_action_pressed("down"):
 		y_velo = MAX_FALL_SPEED
-		
+	
 	var x_speed = move_dir * MOVE_SPEED + x_velo
+	
 	if x_speed < 0:
 		x_speed = max(x_speed, -MAX_MOVE_SPEED)
 	else:
 		x_speed = min(x_speed, MAX_MOVE_SPEED)
+	
+	if x_speed != 0 or y_velo != 0:
+		move_and_slide(Vector2(x_speed, y_velo), Vector2(0, -1))
 		
-	move_and_slide(Vector2(x_speed, y_velo), Vector2(0, -1))
+		player_state["pos"] = position
 	
 	var grounded = is_on_floor()
 	var hit_ceiling = is_on_ceiling()
 	var wall_climb = (
 		!grounded && 
-		y_velo>-300 && 
+		y_velo > -FRICTION && 
 		is_on_wall() && (
 			Input.is_action_pressed("right") || 
 			Input.is_action_pressed("left")
 		)
 	)
+	
 	if wall_climb:
-		wall_climb_debounce.start()
-	var enable_wall_jump = wall_climb_debounce.time_left > 0
+		WallClimbDebounce.start()
+	
+	var enable_wall_jump = WallClimbDebounce.time_left > 0
+	
 	if grounded or wall_climb:
 		double_jump = true
 	
@@ -70,19 +104,20 @@ func _physics_process(delta):
 				x_velo = -JUMP_FORCE
 			else:
 				x_velo =  JUMP_FORCE
+			
 			enable_wall_jump = false
 			wall_climb = false
 		elif not grounded:
 			y_velo += JUMP_FORCE / 2
 			double_jump = false
-			
+	
 	if wall_climb:
 		y_velo = FRICTION
 	if (grounded and y_velo >= 0) or hit_ceiling:
 		y_velo = 5
 	if y_velo > MAX_FALL_SPEED:
 		y_velo = MAX_FALL_SPEED
-		
+	
 	if facing_right and move_dir < 0:
 		flip()
 	if !facing_right and move_dir > 0:
@@ -90,40 +125,62 @@ func _physics_process(delta):
 	
 	if grounded:
 		if move_dir == 0:
-			play_anim("Idle")
+			player_state["anim"] = "Idle"
 		else:
-			play_anim("Walk")
+			player_state["anim"] = "Walk"
 	elif wall_climb:
-		play_anim("Wall climb")
+		player_state["anim"] = "Wall climb"
 	elif y_velo < 0:
 		if double_jump:
-			play_anim("Jump")
+			player_state["anim"] = "Jump"
 		else:
-			play_anim("Double jump")
-	elif y_velo>=0:
-		play_anim("Fall")
+			player_state["anim"] = "Double jump"
+	elif y_velo >= 0:
+		player_state["anim"] = "Fall"
+	
+	play_anim(player_state["anim"])
+	
+	update_trajectory()
+	
+	EntityHandler.synchronize("update_player_state", player_state)
+
+
+func _input(event):
+	if !is_network_master():
+		return
+	
+	var just_pressed = event.is_pressed() and not event.is_echo()
+	
+	if event.is_action_pressed("activate") and just_pressed:
+		EntityHandler.synchronize("activate_ability", player_state)
+	if event.is_action_pressed("ability_1") and just_pressed:
+		player_state["ability"] = "Bullet"
+	if event.is_action_pressed("ability_2") and just_pressed:
+		player_state["ability"] = "HomingMissile"
+
 
 func flip():
 	facing_right = !facing_right
-	sprite.flip_h = !sprite.flip_h
+	Spr.flip_h = !Spr.flip_h
 	Hand.position.x *= -1
+	
+	player_state["flip"] = Spr.flip_h
+	player_state["hand_pos"] = Hand.position.x
+
 
 func play_anim(anim_name):
-	if anim_player.is_playing() and anim_player.current_animation == anim_name:
+	if AnimPlayer.is_playing() and AnimPlayer.current_animation == anim_name:
 		return
-	anim_player.play(anim_name)
+	
+	AnimPlayer.play(anim_name)
 
-func _input(event):
-	var just_pressed = event.is_pressed() and not event.is_echo()
-	if event.is_action_pressed("activate") and just_pressed:
-		activate_ability()
-	if event.is_action_pressed("ability_1") and just_pressed:
-		Ability = Bullet
-	if event.is_action_pressed("ability_2") and just_pressed:
-		Ability = Homing_missile
 
-func activate_ability():
-	var direction = (get_global_mouse_position() - Hand.global_position).normalized()
-	var AbilityEntity = Ability.instance()
-	owner.add_child(AbilityEntity)
-	AbilityEntity.setup(Hand, direction)
+func update_trajectory():
+	var direction = (get_local_mouse_position() - Hand.position).normalized()
+	
+	player_state["dir"] = direction
+	player_state["mouse_pos"] = get_global_mouse_position()
+	
+	Trajectory.clear_points()
+	Trajectory.add_point(Hand.position)
+	Trajectory.add_point(Hand.position + direction * LENGTH)

@@ -6,7 +6,7 @@ Overview
 Gameplay
 --------
 
-- Team-based 3v3 game
+- Team-based 3v3
 - Each game is refreshing with different combinations of gamemodes
 - Endless possibility to customize your playstyle through an ability system
 
@@ -28,7 +28,7 @@ Contribute
 
 - `Issue Tracker <https://github.com/Legacy107/Everhunt/issues/>`_ 
 - `Source Code <https://github.com/Legacy107/Everhunt/>`_
-- Check out :doc:`guidelines` before making contribution
+- Check out :doc:`guidelines` before making any contribution
 
 Support
 -------
