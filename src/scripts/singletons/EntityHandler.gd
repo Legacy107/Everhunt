@@ -28,44 +28,44 @@ remote func synchronize_unreliable(func_name, state):
 
 remote func activate_ability(player_id, state):
 	var PlayerContainer = WorldNode.get_node_or_null("Players/" + str(player_id))
-	
+
 	if PlayerContainer:
 		var Ability = PreloadedAbilities[state["ability"]].instance()
-		
+
 		Ability.set_network_master(player_id)
 		PlayerContainer.add_child(Ability)
-		Ability.setup(PlayerContainer.get_node(state["name"] + "/Hand"), state["dir"])
+		Ability.setup(PlayerContainer.get_node(state["name"] + "/Hand"), state["mouse_direction"])
 
 
 remote func update_player_state(player_id, state):
 	var PlayerContainer = WorldNode.get_node_or_null("Players/" + str(player_id))
-	
+
 	if PlayerContainer and !PlayerContainer.is_network_master():
 		var Player = PlayerContainer.get_node_or_null(state["name"])
-		
-		Player.position = state["pos"]
+
+		Player.position = state["position"]
 		Player.get_node("Sprite").flip_h = state["flip"]
-		Player.get_node("Hand").position.x = state["hand_pos"]
-		play_anim(state["anim"], Player.get_node("AnimationPlayer"))
-	
+		Player.get_node("Hand").position.x = state["hand_position"]
+		play_animation(state["animation"], Player.get_node("AnimationPlayer"))
+
 	if PlayerContainer:
 		var Mouse = PlayerContainer.get_node_or_null(state["mouse_name"])
-		
-		Mouse.position = state["mouse_pos"]
+
+		Mouse.position = state["mouse_position"]
 
 
 remote func update_bullet_state(player_id, state):
 	var PlayerContainer = WorldNode.get_node_or_null("Players/" + str(player_id))
-	
+
 	if PlayerContainer and !PlayerContainer.is_network_master():
 		var Bullet = PlayerContainer.get_node_or_null(state["name"])
-		
+
 		if Bullet:
-			Bullet.position = state["pos"]
+			Bullet.position = state["position"]
 
 
-func play_anim(anim_name, AnimPlayer):
-	if AnimPlayer.is_playing() and AnimPlayer.current_animation == anim_name:
+func play_animation(animation_name, AnimPlayer):
+	if AnimPlayer.is_playing() and AnimPlayer.current_animation == animation_name:
 		return
-	
-	AnimPlayer.play(anim_name)
+
+	AnimPlayer.play(animation_name)

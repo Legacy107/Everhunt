@@ -24,7 +24,7 @@ func apply_force(force):
 func _physics_process(delta):
 	var desired = global_position.direction_to(Mouse.position) * MAX_SPEED
 	var force = velocity.direction_to(desired).clamped(MAX_FORCE)
-	
+
 	apply_force(force)
 	velocity = (velocity + acceleration).clamped(MAX_SPEED)
 	position += velocity * delta
