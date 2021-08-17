@@ -7,7 +7,7 @@ var PreloadedAbilities = {
 }
 
 
-onready var WorldNode = get_node("/root/World")
+onready var WorldNode = get_node("/root/Game/World")
 
 
 remote func synchronize(func_name, state):

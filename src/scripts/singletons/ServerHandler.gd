@@ -7,7 +7,7 @@ var SINGLEPLAYER = false
 var PreloadedPlayer = preload("res://src/components/Player.tscn")
 
 
-onready var WorldNode = get_node("/root/World")
+onready var WorldNode = get_node("/root/Game/World")
 
 
 var network = NetworkedMultiplayerENet.new()
