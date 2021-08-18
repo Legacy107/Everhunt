@@ -9,8 +9,8 @@ var GRAVITY = 50
 var FRICTION = 100
 
 
-onready var Sprite = $Sprite
-onready var AnimationPlayer = $AnimationPlayer
+#onready var Sprite = $Sprite
+onready var AnimatedSprite = $AnimatedSprite
 onready var Camera = $Camera2D
 onready var WallClimbDebounce = $WallClimbDebounce
 onready var Hand = $Hand
@@ -27,7 +27,7 @@ var double_jump = true
 onready var player_state = {
 	"name" : name,
 	"position" : position,
-	"flip" : Sprite.flip_h,
+	"flip" : AnimatedSprite.flip_h,
 	"hand_position" : Hand.position.x,
 	"animation" : "Idle",
 	"mouse_direction" : (get_local_mouse_position() - Hand.position).normalized(),
@@ -126,7 +126,7 @@ func _physics_process(_delta):
 		if move_dir == 0:
 			player_state["animation"] = "Idle"
 		else:
-			player_state["animation"] = "Walk"
+			player_state["animation"] = "Run"
 	elif wall_climb:
 		player_state["animation"] = "Wall climb"
 	elif y_velo < 0:
@@ -160,18 +160,18 @@ func _input(event):
 
 func flip():
 	facing_right = !facing_right
-	Sprite.flip_h = !Sprite.flip_h
+	AnimatedSprite.flip_h = !AnimatedSprite.flip_h
 	Hand.position.x *= -1
 
-	player_state["flip"] = Sprite.flip_h
+	player_state["flip"] = AnimatedSprite.flip_h
 	player_state["hand_position"] = Hand.position.x
 
 
 func play_anim(anim_name):
-	if AnimationPlayer.is_playing() and AnimationPlayer.current_animation == anim_name:
+	if AnimatedSprite.is_playing() and AnimatedSprite.animation == anim_name:
 		return
 
-	AnimationPlayer.play(anim_name)
+	AnimatedSprite.play(anim_name)
 
 
 func update_trajectory():
