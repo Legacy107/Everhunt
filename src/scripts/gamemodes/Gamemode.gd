@@ -12,10 +12,16 @@ func _init(_winning_score = 0).():
 
 func setup():
 	get_parent().connect("increase_score", self, "_on_GameHandler_increase_score")
+	$Timer.connect("timeout", self, "_on_Timer_timeout")
 
 
 func _on_GameHandler_increase_score(team_id):
 	current_score[team_id] += 1
+	check_winning_condition()
+
+
+func _on_Timer_timeout():
+	winning_score = current_score.max()
 	check_winning_condition()
 
 
@@ -32,7 +38,9 @@ func check_winning_condition():
 
 func handle_win(team_id):
 	print('Team %s win the round' % team_id)
+	queue_free()
 
 
 func handle_draw():
 	print('Draw round')
+	queue_free()

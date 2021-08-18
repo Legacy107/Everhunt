@@ -7,7 +7,3 @@ func _init().(3):
 
 func _ready():
 	pass
-
-
-func _on_Timer_timeout():
-	handle_draw()
