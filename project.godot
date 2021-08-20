@@ -8,14 +8,25 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Gamemode",
+"language": "GDScript",
+"path": "res://src/scripts/gamemodes/Gamemode.gd"
+} ]
+_global_script_class_icons={
+"Gamemode": ""
+}
+
 [application]
 
 config/name="EHC"
-run/main_scene="res://src/scenes/World.tscn"
+run/main_scene="res://src/scenes/Game.tscn"
 config/icon="res://assets/images/icon.png"
 
 [autoload]
 
+GameEvent="*res://src/scripts/singletons/GameEvent.gd"
 ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
 EntityHandler="*res://src/scripts/singletons/EntityHandler.gd"
 
