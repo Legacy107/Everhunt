@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "Node",
 "class": "Gamemode",
 "language": "GDScript",
 "path": "res://src/scripts/gamemodes/Gamemode.gd"
