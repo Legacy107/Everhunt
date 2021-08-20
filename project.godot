@@ -26,6 +26,7 @@ config/icon="res://assets/images/icon.png"
 
 [autoload]
 
+GameEvent="*res://src/scripts/singletons/GameEvent.gd"
 ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
 EntityHandler="*res://src/scripts/singletons/EntityHandler.gd"
 
