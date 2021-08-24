@@ -11,7 +11,9 @@ func _init(_winning_score = 0).():
 
 
 func setup():
+# warning-ignore:return_value_discarded
 	GameEvent.connect("increase_score", self, "_on_GameEvent_increase_score")
+# warning-ignore:return_value_discarded
 	$Timer.connect("timeout", self, "_on_Timer_timeout")
 
 

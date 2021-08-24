@@ -1,7 +1,7 @@
 extends Node
 
 
-onready var CaptureTheFlag = preload("res://src/components/gamemodes/CaptureTheFlag.tscn").instance()
+onready var CaptureTheFlag = preload("res://src/components/gamemodes/CaptureTheFlag/CaptureTheFlag.tscn").instance()
 
 
 func _ready():

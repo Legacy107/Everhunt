@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/Items/Checkpoints/Checkpoint/Checkpoint (No Flag).png" type="Texture" id=3]
+[ext_resource path="res://src/scripts/gamemodes/CaptureTheFlag/FlagStation.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="FlagStation" type="Area2D"]
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 8, -16 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
