@@ -6,14 +6,13 @@ class_name CTFFlag
 onready var NodeUtil = preload("res://src/utils/NodeUtil.gd").new()
 onready var BigFlag = $BigFlag
 onready var SmallFlag = $SmallFlag
-onready var Collision = $CollisionShape2D
 export var team_id = 0
 export var first_capture = true
 
 
 func _ready():
-	play_anim(BigFlag, "default")
-	play_anim(SmallFlag, "default")
+	play_animation(BigFlag, "default")
+	play_animation(SmallFlag, "default")
 
 
 func setup(_team_id):
@@ -24,11 +23,11 @@ func change_physic(mode):
 	set_deferred("mode", mode)
 
 
-func play_anim(Flag, anim_name):
-	if Flag.is_playing() and Flag.animation == anim_name:
+func play_animation(Flag, animation_name):
+	if Flag.is_playing() and Flag.animation == animation_name:
 		return
 
-	Flag.play(anim_name)
+	Flag.play(animation_name)
 
 
 func _on_body_entered(body):
@@ -41,7 +40,7 @@ func _on_body_entered(body):
 	# Flag captured
 	if body.team_id != team_id:
 		first_capture = false
-		play_anim(BigFlag, "collected")
+		play_animation(BigFlag, "collected")
 		SmallFlag.visible = true
 
 		NodeUtil.reparent(self, body)

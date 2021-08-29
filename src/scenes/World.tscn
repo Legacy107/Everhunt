@@ -72,7 +72,7 @@ position = Vector2( 991.621, 555.365 )
 [node name="Spawn4" type="Position2D" parent="Spawns"]
 position = Vector2( 1150.76, 432.77 )
 
-[node name="GameContainer" type="Node" parent="."]
+[node name="GamemodeContainer" type="Node" parent="."]
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = SubResource( 3 )

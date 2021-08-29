@@ -11,14 +11,14 @@ func _ready():
 	GameEvent.connect("CTF_return_flag", self, "_on_CTF_return_flag")
 # warning-ignore:return_value_discarded	
 	GameEvent.connect("CTF_capture_flag", self, "_on_CTF_capture_flag")
-	if has_flag: respawn_flag()
+	if has_flag: spawn_flag()
 
 
 func setup(_team_id):
 	team_id = _team_id
 
 
-func respawn_flag():
+func spawn_flag():
 	var FlagInstance = Flag.instance()
 	FlagInstance.setup(team_id)
 	call_deferred("add_child", FlagInstance)
@@ -35,7 +35,7 @@ func _on_body_entered(body):
 
 func _on_CTF_return_flag(_team_id):
 	if team_id == _team_id:
-		respawn_flag()
+		spawn_flag()
 
 
 func _on_CTF_capture_flag(_team_id):
