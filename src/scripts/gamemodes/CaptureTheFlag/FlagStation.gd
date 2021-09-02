@@ -11,7 +11,8 @@ func _ready():
 	GameEvent.connect("CTF_return_flag", self, "_on_CTF_return_flag")
 # warning-ignore:return_value_discarded	
 	GameEvent.connect("CTF_capture_flag", self, "_on_CTF_capture_flag")
-	if has_flag: spawn_flag()
+	if has_flag:
+		spawn_flag()
 
 
 func setup(_team_id):

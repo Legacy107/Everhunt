@@ -7,12 +7,12 @@ onready var NodeUtil = preload("res://src/utils/NodeUtil.gd").new()
 onready var BigFlag = $BigFlag
 onready var SmallFlag = $SmallFlag
 export var team_id = 0
-export var first_capture = true
+export var recapturable = false
 
 
 func _ready():
-	play_animation(BigFlag, "default")
-	play_animation(SmallFlag, "default")
+	NodeUtil.play_animation(BigFlag, "idle")
+	NodeUtil.play_animation(SmallFlag, "idle")
 
 
 func setup(_team_id):
@@ -23,14 +23,8 @@ func change_physic(mode):
 	set_deferred("mode", mode)
 
 
-func play_animation(Flag, animation_name):
-	if Flag.is_playing() and Flag.animation == animation_name:
-		return
-
-	Flag.play(animation_name)
-
-
 func _on_body_entered(body):
+	# Flag is on a player
 	if SmallFlag.visible:
 		return
 
@@ -39,8 +33,8 @@ func _on_body_entered(body):
 
 	# Flag captured
 	if body.team_id != team_id:
-		first_capture = false
-		play_animation(BigFlag, "collected")
+		recapturable = true
+		NodeUtil.play_animation(BigFlag, "collected")
 		SmallFlag.visible = true
 
 		NodeUtil.reparent(self, body)
@@ -48,7 +42,7 @@ func _on_body_entered(body):
 		return
 
 	# Flag returned
-	if not first_capture:
+	if recapturable:
 		GameEvent.emit_signal("CTF_return_flag", team_id)
 		queue_free()
 
