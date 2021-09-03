@@ -7,10 +7,10 @@ export var has_flag = true
 
 
 func _ready():
-# warning-ignore:return_value_discarded
-	GameEvent.connect("CTF_return_flag", self, "_on_CTF_return_flag")
 # warning-ignore:return_value_discarded	
 	GameEvent.connect("CTF_capture_flag", self, "_on_CTF_capture_flag")
+# warning-ignore:return_value_discarded
+	GameEvent.connect("CTF_return_flag", self, "_on_CTF_return_flag")
 	if has_flag:
 		spawn_flag()
 

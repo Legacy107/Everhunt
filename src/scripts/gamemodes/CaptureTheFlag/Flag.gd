@@ -19,19 +19,19 @@ func setup(_team_id):
 	team_id = _team_id
 
 
-func change_physic(mode):
+func change_physics(mode):
 	set_deferred("mode", mode)
 
 
 func _on_body_entered(body):
-	# Flag is on a player
+	# If flag is on a player
 	if SmallFlag.visible:
 		return
 
 	if not (body is Player):
 		return
 
-	# Flag captured
+	# If flag is captured
 	if body.team_id != team_id:
 		recapturable = true
 		NodeUtil.play_animation(BigFlag, "collected")
@@ -41,11 +41,11 @@ func _on_body_entered(body):
 		GameEvent.emit_signal("CTF_capture_flag", team_id)
 		return
 
-	# Flag returned
+	# If flag is returned
 	if recapturable:
 		GameEvent.emit_signal("CTF_return_flag", team_id)
 		queue_free()
 
 
 func _on_touchdown(_body):
-	change_physic(MODE_KINEMATIC)
+	change_physics(MODE_KINEMATIC)

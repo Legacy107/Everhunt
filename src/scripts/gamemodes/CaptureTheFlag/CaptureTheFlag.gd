@@ -12,8 +12,8 @@ func _init().(3):
 
 func setup():
 	.setup()
-	var flag_stations_instances = [FlagStation.instance(), FlagStation.instance()]
-	for station_id in flag_stations_instances.size():
-		flag_stations_instances[station_id].setup(station_id)
-		flag_stations_instances[station_id].global_position = flag_positions[station_id]
-		GamemodeContainer.add_child(flag_stations_instances[station_id])
+	var flag_station_instances = [FlagStation.instance(), FlagStation.instance()]
+	for id in flag_station_instances.size():
+		flag_station_instances[id].setup(id)
+		flag_station_instances[id].global_position = flag_positions[id]
+		GamemodeContainer.add_child(flag_station_instances[id])
