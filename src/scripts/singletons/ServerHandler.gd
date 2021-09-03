@@ -40,42 +40,42 @@ func _connection_succeeded():
 	print("Succeeded to connect")
 
 # Tell the server to run the func on all clients
-remote func synchronize(path, func_name, state):
+remote func synchronize(node_path, func_name, state):
 	if not SINGLEPLAYER:
-		rpc_id(1, "synchronize", path, func_name, state)
+		rpc_id(1, "synchronize", node_path, func_name, state)
 	else:
-		get_node(path).call(func_name, state)
+		get_node(node_path).call(func_name, state)
 
 
-remote func synchronize_unreliable(path, func_name, state):
+remote func synchronize_unreliable(node_path, func_name, state):
 	if not SINGLEPLAYER:
-		rpc_unreliable_id(1, "synchronize", path, func_name, state)
+		rpc_unreliable_id(1, "synchronize", node_path, func_name, state)
 	else:
-		get_node(path).call(func_name, state)
+		get_node(node_path).call(func_name, state)
 
 # Run the func on this client and tell the server to run the func on all OTHER clients
-remote func synchronize_client(path, func_name, state):
+remote func synchronize_client(node_path, func_name, state):
 	if not SINGLEPLAYER:
-		rpc_id(1, "synchronize_client", path, func_name, state)
+		rpc_id(1, "synchronize_client", node_path, func_name, state)
 
-	get_node(path).call(func_name, state)
+	get_node(node_path).call(func_name, state)
 
 
-remote func synchronize_client_unreliable(path, func_name, state):
+remote func synchronize_client_unreliable(node_path, func_name, state):
 	if not SINGLEPLAYER:
-		rpc_unreliable_id(1, "synchronize_client", path, func_name, state)
+		rpc_unreliable_id(1, "synchronize_client", node_path, func_name, state)
 
-	get_node(path).call(func_name, state)
+	get_node(node_path).call(func_name, state)
 
 # The server calls these funcs so it is best that you do not touch these
-remote func s_synchronize(path, func_name, state):
-	if get_node_or_null(path):
-		get_node(path).call(func_name, state)
+remote func s_synchronize(node_path, func_name, state):
+	if get_node_or_null(node_path):
+		get_node(node_path).call(func_name, state)
 
 
-remote func s_synchronize_client(path, func_name, state, rpc_sender_id):
-	if get_node_or_null(path) and unique_id != rpc_sender_id:
-		get_node(path).call(func_name, state)
+remote func s_synchronize_client(node_path, func_name, state, rpc_sender_id):
+	if get_node_or_null(node_path) and unique_id != rpc_sender_id:
+		get_node(node_path).call(func_name, state)
 
 
 
