@@ -54,6 +54,12 @@ remote func update_player_state(player_id, state):
 		Mouse.position = state["mouse_position"]
 
 
+remote func set_players_team_id(player_ids):
+	for index in player_ids.size():
+		var Player = get_node("/root/Game/World/Players/%d/Player" % player_ids[index])
+		Player.team_id = index % 2
+
+
 remote func update_bullet_state(player_id, state):
 	var PlayerContainer = WorldNode.get_node_or_null("Players/" + str(player_id))
 
