@@ -9,44 +9,48 @@ var GRAVITY = 50
 var FRICTION = 100
 
 
-onready var Sprite = $Sprite
-onready var AnimationPlayer = $AnimationPlayer
+onready var NodeUtil = preload("res://src/utils/NodeUtil.gd").new()
+var Cards = {
+	"BulletCard" : preload("res://src/components/cards/BulletCard.tscn"),
+	"HomingMissileCard" : preload("res://src/components/cards/HomingMissileCard.tscn")
+}
+
+
+onready var Flip = $Flip
+onready var Hand = $Flip/Hand
+onready var Mouse = $Mouse
 onready var Camera = $Camera2D
+onready var AnimationPlayer = $AnimationPlayer
 onready var WallClimbDebounce = $WallClimbDebounce
-onready var Hand = $Hand
-onready var Trajectory = $Trajectory
-onready var Mouse = get_parent().get_node("Mouse")
+onready var Container = get_node("/root/World/EntityContainer/" + str(get_network_master()))
 
 
 var y_velo = 0
 var x_velo = 0
 var facing_right = true
 var double_jump = true
+var cards = ["BulletCard", "HomingMissileCard"]
 
 
 onready var player_state = {
-	"name" : name,
 	"position" : position,
-	"flip" : Sprite.flip_h,
-	"hand_position" : Hand.position.x,
+	"facing_right" : facing_right,
 	"animation" : "Idle",
-	"mouse_direction" : (get_local_mouse_position() - Hand.position).normalized(),
-	"ability" : "Bullet",
-	"mouse_name" : Mouse.name,
-	"mouse_position" : Mouse.position
+	"mouse_position" : get_global_mouse_position(),
 }
 
 
 func _ready():
-	if !is_network_master():
-		Trajectory.hide()
-	else:
+	if is_network_master():
 		Camera.current = true
 		z_index = 2
 
+	append_card(0)
+	append_card(1)
+
 
 func _physics_process(_delta):
-	if !is_network_master():
+	if not is_network_master():
 		return
 
 	var move_dir = 0
@@ -73,10 +77,10 @@ func _physics_process(_delta):
 	var grounded = is_on_floor()
 	var hit_ceiling = is_on_ceiling()
 	var wall_climb = (
-		!grounded && 
-		y_velo > -FRICTION && 
-		is_on_wall() && (
-			Input.is_action_pressed("right") || 
+		not grounded and
+		y_velo > -FRICTION and
+		is_on_wall() and (
+			Input.is_action_pressed("right") or
 			Input.is_action_pressed("left")
 		)
 	)
@@ -96,14 +100,15 @@ func _physics_process(_delta):
 		else:
 			x_velo -= FRICTION
 
-	if (grounded or enable_wall_jump or double_jump) and Input.is_action_just_pressed("up"):
+	if (grounded or enable_wall_jump or double_jump) \
+		and Input.is_action_just_pressed("up"):
 		y_velo = -JUMP_FORCE
 		if enable_wall_jump:
 			if facing_right:
 				x_velo = -JUMP_FORCE
 			else:
 				x_velo =  JUMP_FORCE
-			
+
 			enable_wall_jump = false
 			wall_climb = false
 		elif not grounded:
@@ -116,11 +121,9 @@ func _physics_process(_delta):
 		y_velo = 5
 	if y_velo > MAX_FALL_SPEED:
 		y_velo = MAX_FALL_SPEED
-	
-	if facing_right and move_dir < 0:
-		flip()
-	if !facing_right and move_dir > 0:
-		flip()
+
+	facing_right = Mouse.global_position.x > global_position.x
+	flip()
 
 	if grounded:
 		if move_dir == 0:
@@ -137,47 +140,48 @@ func _physics_process(_delta):
 	elif y_velo >= 0:
 		player_state["animation"] = "Fall"
 
-	play_anim(player_state["animation"])
+	NodeUtil.play_animation(AnimationPlayer, player_state["animation"])
 
-	update_trajectory()
+	Mouse.global_position = get_global_mouse_position()
 
-	EntityHandler.synchronize("update_player_state", player_state)
+	player_state["mouse_position"] = Mouse.global_position
 
-
-func _input(event):
-	if !is_network_master():
-		return
-
-	var just_pressed = event.is_pressed() and not event.is_echo()
-
-	if event.is_action_pressed("activate") and just_pressed:
-		EntityHandler.synchronize("activate_ability", player_state)
-	if event.is_action_pressed("ability_1") and just_pressed:
-		player_state["ability"] = "Bullet"
-	if event.is_action_pressed("ability_2") and just_pressed:
-		player_state["ability"] = "HomingMissile"
+	ServerHandler.synchronize_unreliable(get_path(), "update_player_state", player_state)
 
 
 func flip():
-	facing_right = !facing_right
-	Sprite.flip_h = !Sprite.flip_h
-	Hand.position.x *= -1
+	if facing_right:
+		Flip.scale.x = 1
+	else:
+		Flip.scale.x = -1
 
-	player_state["flip"] = Sprite.flip_h
-	player_state["hand_position"] = Hand.position.x
-
-
-func play_anim(anim_name):
-	if AnimationPlayer.is_playing() and AnimationPlayer.current_animation == anim_name:
-		return
-
-	AnimationPlayer.play(anim_name)
+	player_state["facing_right"] = facing_right
 
 
-func update_trajectory():
-	var mouse_direction = (get_local_mouse_position() - Hand.position).normalized()
 
-	player_state["mouse_direction"] = mouse_direction
-	player_state["mouse_position"] = get_global_mouse_position()
 
-	Trajectory.update_trajectory(Hand.position, mouse_direction)
+remote func append_card(card_id):
+	var CardInstance = Cards[cards[card_id]].instance()
+
+	CardInstance.set_network_master(get_network_master())
+	CardInstance.setup(Container, Mouse, Hand.position, card_id)
+
+	Flip.add_child(CardInstance)
+
+
+remote func erase_card(card_id):
+	Flip.get_node(cards[card_id]).queue_free()
+
+
+remote func update_player_state(state):
+	if not is_network_master():
+		position = state["position"]
+
+		if state["facing_right"]:
+			Flip.scale.x = 1
+		else:
+			Flip.scale.x = -1
+
+		NodeUtil.play_animation(AnimationPlayer, state["animation"])
+
+		Mouse.global_position = state["mouse_position"]

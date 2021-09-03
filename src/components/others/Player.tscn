@@ -1,20 +1,18 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/sprites/Main Characters/Ninja Frog/Sprite sheet.png" type="Texture" id=1]
-[ext_resource path="res://src/scripts/Trajectory.gd" type="Script" id=2]
-[ext_resource path="res://src/scripts/Player.gd" type="Script" id=4]
+[ext_resource path="res://src/scripts/others/Player.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 10.508
 height = 3.606
 
 [sub_resource type="Animation" id=2]
-resource_name = "Double jump"
 length = 0.25
 loop = true
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Flip/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -28,7 +26,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Flip/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -43,7 +41,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Flip/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -57,7 +55,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=5]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Flip/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -74,7 +72,7 @@ length = 0.55
 loop = true
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Flip/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -90,7 +88,7 @@ tracks/0/keys = {
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Flip/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -102,30 +100,37 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 112, 32, 32 ), Rect2( 32, 112, 32, 32 ), Rect2( 64, 112, 32, 32 ), Rect2( 96, 112, 32, 32 ) ]
 }
 
-[sub_resource type="Gradient" id=8]
-offsets = PoolRealArray( 0, 0.512, 1 )
-colors = PoolColorArray( 0.372549, 0.164706, 0.835294, 0.501961, 0.184314, 0.698039, 0.8, 0.501961, 0.87451, 0.952941, 0.968627, 0.501961 )
-
-[node name="PlayerContainer" type="Node"]
-
-[node name="Mouse" type="Position2D" parent="."]
-
-[node name="Player" type="KinematicBody2D" parent="."]
+[node name="Player" type="KinematicBody2D"]
 z_index = 1
 collision_layer = 2
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="Player"]
-position = Vector2( 0, -7.65838 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 32, 32 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -4.25 )
 shape = SubResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+[node name="Flip" type="Position2D" parent="."]
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite" type="Sprite" parent="Flip"]
+position = Vector2( 0, -7.65838 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 150, 32, 32 )
+
+[node name="Hand" type="Position2D" parent="Flip"]
+position = Vector2( 11.2568, 1.98649 )
+
+[node name="Mouse" type="Position2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+smoothing_speed = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/Double jump" = SubResource( 2 )
 anims/Fall = SubResource( 3 )
 anims/Idle = SubResource( 4 )
@@ -133,21 +138,6 @@ anims/Jump = SubResource( 5 )
 anims/Walk = SubResource( 6 )
 "anims/Wall climb" = SubResource( 7 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2( 0.5, 0.5 )
-smoothing_enabled = true
-smoothing_speed = 10.0
-
-[node name="WallClimbDebounce" type="Timer" parent="Player"]
+[node name="WallClimbDebounce" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
-
-[node name="Hand" type="Position2D" parent="Player"]
-position = Vector2( 11.2568, 1.98649 )
-
-[node name="Trajectory" type="Line2D" parent="Player"]
-width = 5.0
-gradient = SubResource( 8 )
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource( 2 )
