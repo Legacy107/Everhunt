@@ -8,6 +8,34 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "CTFFlag",
+"language": "GDScript",
+"path": "res://src/scripts/gamemodes/CaptureTheFlag/Flag.gd"
+}, {
+"base": "Node",
+"class": "Gamemode",
+"language": "GDScript",
+"path": "res://src/scripts/gamemodes/Gamemode.gd"
+}, {
+"base": "Resource",
+"class": "MapInfo",
+"language": "GDScript",
+"path": "res://src/utils/resources/MapInfo.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://src/scripts/Player.gd"
+} ]
+_global_script_class_icons={
+"CTFFlag": "",
+"Gamemode": "",
+"MapInfo": "",
+"Player": ""
+}
+
 [application]
 
 config/name="Everhunt"
@@ -63,6 +91,12 @@ card_1={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Foreground"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="GamemodeEntities"
 
 [physics]
 

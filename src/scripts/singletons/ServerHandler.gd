@@ -93,6 +93,8 @@ remote func return_connected_players(s_player_ids):
 		if player_id != unique_id:
 			append_player(player_id)
 
+	EntityHandler.set_players_team_id(s_player_ids)
+
 
 remote func return_disconnected_player(s_player_id):
 	player_ids.erase(s_player_id)

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 
 var MOVE_SPEED = 400
 var MAX_MOVE_SPEED = 600
@@ -25,6 +27,7 @@ onready var WallClimbDebounce = $WallClimbDebounce
 onready var Container = get_node("/root/World/EntityContainer/" + str(get_network_master()))
 
 
+var team_id = 0
 var y_velo = 0
 var x_velo = 0
 var facing_right = true
@@ -70,6 +73,7 @@ func _physics_process(_delta):
 		x_speed = min(x_speed, MAX_MOVE_SPEED)
 
 	if x_speed != 0 or y_velo != 0:
+# warning-ignore:return_value_discarded
 		move_and_slide(Vector2(x_speed, y_velo), Vector2(0, -1))
 
 		player_state["position"] = position
