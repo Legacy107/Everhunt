@@ -1,14 +1,14 @@
 extends Node
 
 
-var SINGLEPLAYER = false
+var SINGLEPLAYER = true
 
 
 var Player = preload("res://src/components/others/Player.tscn")
 var Node = preload("res://src/components/others/Node.tscn")
 
 
-onready var WorldNode = get_node("/root/World")
+onready var WorldNode = get_node("/root/Game/World")
 
 
 var network = NetworkedMultiplayerENet.new()
@@ -92,8 +92,6 @@ remote func return_connected_players(s_player_ids):
 	for player_id in player_ids:
 		if player_id != unique_id:
 			append_player(player_id)
-
-	EntityHandler.set_players_team_id(s_player_ids)
 
 
 remote func return_disconnected_player(s_player_id):

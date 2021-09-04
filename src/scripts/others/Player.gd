@@ -18,13 +18,16 @@ var Cards = {
 }
 
 
+onready var WorldNode = get_node("/root/Game/World")
+
+
 onready var Flip = $Flip
 onready var Hand = $Flip/Hand
 onready var Mouse = $Mouse
 onready var Camera = $Camera2D
 onready var AnimationPlayer = $AnimationPlayer
 onready var WallClimbDebounce = $WallClimbDebounce
-onready var Container = get_node("/root/World/EntityContainer/" + str(get_network_master()))
+onready var Container = WorldNode.get_node("EntityContainer/" + str(get_network_master()))
 
 
 var team_id = 0

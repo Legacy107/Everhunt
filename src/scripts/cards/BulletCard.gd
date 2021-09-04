@@ -75,13 +75,13 @@ func update_card():
 
 
 
-remote func equip(state):
+remote func equip(_state):
 	equipped = true
 	show()
 	set_physics_process(true)
 
 
-remote func unequip(state):
+remote func unequip(_state):
 	equipped = false
 	hide()
 	set_physics_process(false)

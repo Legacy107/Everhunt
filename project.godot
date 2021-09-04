@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://src/scripts/Player.gd"
+"path": "res://src/scripts/others/Player.gd"
 } ]
 _global_script_class_icons={
 "CTFFlag": "",
@@ -39,12 +39,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Everhunt"
-run/main_scene="res://src/scenes/World.tscn"
+run/main_scene="res://src/scenes/Game.tscn"
 config/icon="res://assets/images/icon.png"
 
 [autoload]
 
 ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
+GameEvent="*res://src/scripts/singletons/GameEvent.gd"
 
 [editor_plugins]
 
