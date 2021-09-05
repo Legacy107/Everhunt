@@ -9,45 +9,44 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "HBoxContainer",
-"class": "ContributorClass",
+"base": "RigidBody2D",
+"class": "CTFFlag",
 "language": "GDScript",
-"path": "res://addons/github-integration/scripts/ContributorClass.gd"
+"path": "res://src/scripts/gamemodes/CaptureTheFlag/Flag.gd"
 }, {
-"base": "PanelContainer",
-"class": "GistItem",
+"base": "Node",
+"class": "Gamemode",
 "language": "GDScript",
-"path": "res://addons/github-integration/scripts/GistItem.gd"
+"path": "res://src/scripts/gamemodes/Gamemode.gd"
 }, {
-"base": "HBoxContainer",
-"class": "InvitationItem",
+"base": "Resource",
+"class": "MapInfo",
 "language": "GDScript",
-"path": "res://addons/github-integration/scripts/InvitationItem.gd"
+"path": "res://src/utils/resources/MapInfo.gd"
 }, {
-"base": "PanelContainer",
-"class": "RepositoryItem",
+"base": "KinematicBody2D",
+"class": "Player",
 "language": "GDScript",
-"path": "res://addons/github-integration/scripts/RepositoryItem.gd"
+"path": "res://src/scripts/Player.gd"
 } ]
 _global_script_class_icons={
-"ContributorClass": "",
-"GistItem": "",
-"InvitationItem": "",
-"RepositoryItem": ""
+"CTFFlag": "",
+"Gamemode": "",
+"MapInfo": "",
+"Player": ""
 }
 
 [application]
 
-config/name="Platformer Battleground"
-run/main_scene="res://src/scenes/World.tscn"
+config/name="EHC"
+run/main_scene="res://src/scenes/Game.tscn"
 config/icon="res://assets/images/icon.png"
 
 [autoload]
 
-PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
-IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
-UserData="*res://addons/github-integration/scripts/user_data.gd"
-RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
+GameEvent="*res://src/scripts/singletons/GameEvent.gd"
+ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
+EntityHandler="*res://src/scripts/singletons/EntityHandler.gd"
 
 [editor_plugins]
 
@@ -94,6 +93,16 @@ ability_2={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Foreground"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="GamemodeEntities"
+
+[physics]
+
+common/physics_jitter_fix=0.0
 
 [rendering]
 

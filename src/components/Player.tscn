@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/sprites/Main Characters/Ninja Frog/Sprite sheet.png" type="Texture" id=1]
-[ext_resource path="res://src/scripts/trajectory.gd" type="Script" id=2]
+[ext_resource path="res://src/scripts/Trajectory.gd" type="Script" id=2]
 [ext_resource path="res://src/scripts/Player.gd" type="Script" id=4]
 
-[sub_resource type="CapsuleShape2D" id=9]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 10.508
 height = 3.606
 
@@ -106,20 +106,26 @@ tracks/0/keys = {
 offsets = PoolRealArray( 0, 0.512, 1 )
 colors = PoolColorArray( 0.372549, 0.164706, 0.835294, 0.501961, 0.184314, 0.698039, 0.8, 0.501961, 0.87451, 0.952941, 0.968627, 0.501961 )
 
-[node name="Player2" type="KinematicBody2D"]
+[node name="PlayerContainer" type="Node"]
+
+[node name="Mouse" type="Position2D" parent="."]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+z_index = 1
+collision_layer = 2
 script = ExtResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="Player"]
 position = Vector2( 0, -7.65838 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2( 0, -4.25 )
-shape = SubResource( 9 )
+shape = SubResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 "anims/Double jump" = SubResource( 2 )
 anims/Fall = SubResource( 3 )
 anims/Idle = SubResource( 4 )
@@ -127,20 +133,19 @@ anims/Jump = SubResource( 5 )
 anims/Walk = SubResource( 6 )
 "anims/Wall climb" = SubResource( 7 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
+[node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 smoothing_speed = 10.0
 
-[node name="WallClimbDebounce" type="Timer" parent="."]
+[node name="WallClimbDebounce" type="Timer" parent="Player"]
 wait_time = 0.2
 one_shot = true
 
-[node name="Hand" type="Position2D" parent="."]
+[node name="Hand" type="Position2D" parent="Player"]
 position = Vector2( 11.2568, 1.98649 )
 
-[node name="Trajectory" type="Line2D" parent="."]
+[node name="Trajectory" type="Line2D" parent="Player"]
 width = 5.0
 gradient = SubResource( 8 )
 begin_cap_mode = 2
