@@ -84,7 +84,7 @@ remote func return_player_team_ids(s_player_team_ids):
 	player_team_ids = s_player_team_ids
 
 	for id in s_player_team_ids:
-		if id != unique_id:
+		if unique_id != id:
 			append_player(id, s_player_team_ids[id])
 
 
