@@ -1,7 +1,7 @@
 extends Node
 
 
-var SINGLEPLAYER = true
+var SINGLEPLAYER = false
 
 
 var Player = preload("res://src/components/others/Player.tscn")
@@ -17,7 +17,7 @@ var port = 1909
 
 
 var unique_id = 0
-var player_ids = []
+var player_ids = {}
 
 
 func _ready():
@@ -29,7 +29,7 @@ func _ready():
 	network.connect("connection_succeeded", self, "_connection_succeeded")
 
 	if SINGLEPLAYER:
-		append_player(unique_id)
+		append_player(unique_id, 0)
 
 
 func _connection_failed():
@@ -80,29 +80,21 @@ remote func s_synchronize_client(node_path, func_name, state, rpc_sender_id):
 
 
 
-remote func return_connected_player(s_player_id):
-	player_ids.append(s_player_id)
+remote func return_player_ids(s_player_ids):
+	for id in player_ids:
+		if not (id in s_player_ids):
+			erase_player(id)
 
-	append_player(s_player_id)
+	for id in s_player_ids:
+		if not (id in player_ids):
+			append_player(id, s_player_ids[id])
 
-
-remote func return_connected_players(s_player_ids):
 	player_ids = s_player_ids
 
-	for player_id in player_ids:
-		if player_id != unique_id:
-			append_player(player_id)
-
-
-remote func return_disconnected_player(s_player_id):
-	player_ids.erase(s_player_id)
-
-	erase_player(s_player_id)
 
 
 
-
-func append_player(player_id):
+func append_player(player_id, team_id):
 	var NodeInstance = Node.instance()
 
 	NodeInstance.set_network_master(player_id)
@@ -114,7 +106,8 @@ func append_player(player_id):
 
 	PlayerInstance.set_network_master(player_id)
 	PlayerInstance.set_name(str(player_id))
-	PlayerInstance.position = WorldNode.get_node("Spawns/Spawn1").position
+	PlayerInstance.team_id = team_id
+	PlayerInstance.position = WorldNode.get_node("SpawnContainer/Spawn" + str(team_id)).position
 
 	WorldNode.get_node("PlayerContainer").add_child(PlayerInstance)
 

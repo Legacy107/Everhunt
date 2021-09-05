@@ -90,7 +90,7 @@ remote func unequip(_state):
 remote func activate_card(state):
 	var ProjectileInstance = Projectile.instance()
 
-	# NodeUtil.replay_animation(AnimationPlayer, "Activate")
+#	NodeUtil.replay_animation(AnimationPlayer, "Activate")
 
 	ProjectileInstance.set_network_master(get_network_master())
 	ProjectileInstance.set_name(ProjectileInstance.name + str(state["projectile_id"]))
