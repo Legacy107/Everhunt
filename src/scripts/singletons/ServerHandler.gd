@@ -17,7 +17,7 @@ var port = 1909
 
 
 var unique_id = 0
-var player_ids = {}
+var player_team_ids = {}
 
 
 func _ready():
@@ -80,16 +80,24 @@ remote func s_synchronize_client(node_path, func_name, state, rpc_sender_id):
 
 
 
-remote func return_player_ids(s_player_ids):
-	for id in player_ids:
-		if not (id in s_player_ids):
-			erase_player(id)
+remote func return_player_team_ids(s_player_team_ids):
+	player_team_ids = s_player_team_ids
 
-	for id in s_player_ids:
-		if not (id in player_ids):
-			append_player(id, s_player_ids[id])
+	for id in s_player_team_ids:
+		if id != unique_id:
+			append_player(id, s_player_team_ids[id])
 
-	player_ids = s_player_ids
+
+remote func return_connected_player_team_id(s_player_id, s_team_id):
+	player_team_ids[s_player_id] = s_team_id
+
+	append_player(s_player_id, s_team_id)
+
+
+remote func return_disconnected_player_team_id(s_player_id):
+	player_team_ids.erase(s_player_id)
+
+	erase_player(s_player_id)
 
 
 
