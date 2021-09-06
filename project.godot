@@ -12,7 +12,12 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "CTFFlag",
 "language": "GDScript",
-"path": "res://src/scripts/gamemodes/CaptureTheFlag/Flag.gd"
+"path": "res://src/scripts/gamemodes/capture_the_flag/Flag.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Card",
+"language": "GDScript",
+"path": "res://src/scripts/cards/Card.gd"
 }, {
 "base": "Node",
 "class": "Gamemode",
@@ -31,6 +36,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "CTFFlag": "",
+"Card": "",
 "Gamemode": "",
 "MapInfo": "",
 "Player": ""

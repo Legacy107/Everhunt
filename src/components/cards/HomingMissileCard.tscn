@@ -28,21 +28,20 @@ position = Vector2( 6.3, 4.528 )
 shape = SubResource( 1 )
 
 [node name="Pivot" type="Position2D" parent="."]
-scale = Vector2( 1, -1 )
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
-position = Vector2( 6.3, -4.52812 )
-scale = Vector2( 1.4, -0.7 )
+position = Vector2( 6.3, 4.528 )
+scale = Vector2( 1.4, 0.7 )
 texture = ExtResource( 1 )
 hframes = 17
 frame = 1
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="Origin" type="Position2D" parent="Pivot"]
-position = Vector2( 0, -6 )
+position = Vector2( 0, 3 )
 
 [node name="Muzzle" type="Position2D" parent="Pivot"]
-position = Vector2( 17.3, -6 )
+position = Vector2( 17.3, 3 )
 
 [node name="Handle" type="Position2D" parent="."]
 

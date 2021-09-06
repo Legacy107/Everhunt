@@ -1,7 +1,7 @@
 extends Gamemode
 
 
-onready var FlagStation = preload("res://src/components/gamemodes/CaptureTheFlag/FlagStation.tscn")
+onready var FlagStation = preload("res://src/components/gamemodes/capture_the_flag/FlagStation.tscn")
 onready var GamemodeContainer = get_node("/root/Game/World/GamemodeContainer")
 var flag_positions = load("res://src/utils/resources/MapInfo.tres").CTF_flag_positions
 
