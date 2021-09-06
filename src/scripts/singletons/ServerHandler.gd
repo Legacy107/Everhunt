@@ -1,7 +1,7 @@
 extends Node
 
 
-var SINGLEPLAYER = false
+var SINGLEPLAYER = true
 
 
 var Player = preload("res://src/components/others/Player.tscn")

@@ -3,7 +3,7 @@ extends Node2D
 
 onready var MathUtil = preload("res://src/utils/MathUtil.gd").new()
 onready var NodeUtil = preload("res://src/utils/NodeUtil.gd").new()
-var Projectile = preload("res://src/components/projectiles/HomingMissile.tscn")
+var Projectile = preload("res://src/components/card_effects/HomingMissile.tscn")
 
 
 onready var Pivot = $Pivot
