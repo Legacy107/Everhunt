@@ -1,15 +1,30 @@
 extends Card
 
 
-export var _CardEffect = preload("res://src/components/card_effects/HomingMissile.tscn")
-export var _card_aims_at_mouse = false
+export var card_info = {
+	"CardEffect" : preload("res://src/components/cardEffects/HomingMissile.tscn"),
+	"card_aims_at_mouse" : true,
+	"card_only_activate_on_click" : false,
+	"card_can_be_dropped" : false,
+	"card_charges" : 5,
+	"card_cooldown" : 0.9,
+	"card_swivel_dampening" : 0.3,
+}
 
 
-func _init().(_CardEffect, _card_aims_at_mouse):
+func _init().(card_info):
 	pass
 
 
 remote func activate_card(state):
-	shoot_projectile_with_origin_and_direction(
-		instance_card_effect(state["card_effect_instance_id"])
-	)
+	var CardEffectInstance = instance_card_effect(state["card_effect_instance_id"])
+	var origin = Muzzle.global_position
+	var direction = (Mouse.global_position - Muzzle.global_position).normalized()
+
+	if (Mouse.global_position - Origin.global_position).length() \
+		<= (Muzzle.global_position - Origin.global_position).length():
+		direction = (Muzzle.global_position - Origin.global_position).normalized()
+
+	CardEffectInstance.setup(origin, direction)
+
+	.activate_card(state)

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/sprites/Items/Fruits/Apple.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/Items/Fruits/Collected.png" type="Texture" id=2]
-[ext_resource path="res://src/scripts/gamemodes/capture_the_flag/Flag.gd" type="Script" id=3]
+[ext_resource path="res://src/scripts/gamemodes/captureTheFlag/Flag.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -231,7 +231,6 @@ animations = [ {
 
 [node name="Flag" type="RigidBody2D"]
 collision_layer = 4
-collision_mask = 0
 mode = 3
 contacts_reported = 10
 contact_monitor = true

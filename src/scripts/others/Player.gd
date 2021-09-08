@@ -1,24 +1,20 @@
-extends KinematicBody2D
-
 class_name Player
 
+extends KinematicBody2D
 
-var MOVE_SPEED = 400
-var MAX_MOVE_SPEED = 600
-var JUMP_FORCE = 800
-var MAX_FALL_SPEED = 800
-var GRAVITY = 50
-var FRICTION = 100
+
+export var MOVE_SPEED = 400
+export var MAX_MOVE_SPEED = 600
+export var JUMP_FORCE = 800
+export var MAX_FALL_SPEED = 800
+export var GRAVITY = 50
+export var FRICTION = 100
 
 
 onready var NodeUtil = preload("res://src/utils/NodeUtil.gd").new()
-var Cards = {
-	"BulletCard" : preload("res://src/components/cards/BulletCard.tscn"),
-	"HomingMissileCard" : preload("res://src/components/cards/HomingMissileCard.tscn")
-}
 
 
-onready var WorldNode = get_node("/root/Game/World")
+onready var Container = get_node("/root/Game/World/EntityContainer/" + name)
 
 
 onready var Flip = $Flip
@@ -27,15 +23,18 @@ onready var Mouse = $Mouse
 onready var Camera = $Camera2D
 onready var AnimationPlayer = $AnimationPlayer
 onready var WallClimbDebounce = $WallClimbDebounce
-onready var Container = WorldNode.get_node("EntityContainer/" + str(get_network_master()))
 
 
+var ready = false
 var team_id = 0
+var cards_size = 2
+var cards = []
+
+
 var y_velo = 0
 var x_velo = 0
 var facing_right = true
 var double_jump = true
-var cards = ["BulletCard", "HomingMissileCard"]
 
 
 onready var player_state = {
@@ -47,12 +46,14 @@ onready var player_state = {
 
 
 func _ready():
+	ready = true
+
+	for _id in range (cards_size):
+		cards.append("")
+
 	if is_network_master():
 		Camera.current = true
 		z_index = 2
-
-	append_card(0)
-	append_card(1)
 
 
 func _physics_process(_delta):
@@ -165,19 +166,6 @@ func flip():
 	player_state["facing_right"] = facing_right
 
 
-
-
-remote func append_card(card_id):
-	var CardInstance = Cards[cards[card_id]].instance()
-
-	CardInstance.set_network_master(get_network_master())
-	CardInstance.setup(Container, Mouse, Hand.position, card_id)
-
-	Flip.add_child(CardInstance)
-
-
-remote func erase_card(card_id):
-	Flip.get_node(cards[card_id]).queue_free()
 
 
 remote func update_player_state(state):

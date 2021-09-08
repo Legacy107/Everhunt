@@ -1,11 +1,15 @@
 extends Node
 
 
-var SINGLEPLAYER = true
+var SINGLEPLAYER = false
 
 
 var Player = preload("res://src/components/others/Player.tscn")
 var Node = preload("res://src/components/others/Node.tscn")
+var Cards = {
+	"BulletCard" : preload("res://src/components/cards/BulletCard.tscn"),
+	"HomingMissileCard" : preload("res://src/components/cards/HomingMissileCard.tscn"),
+}
 
 
 onready var WorldNode = get_node("/root/Game/World")
@@ -119,7 +123,21 @@ func append_player(player_id, team_id):
 
 	WorldNode.get_node("PlayerContainer").add_child(PlayerInstance)
 
+	if not PlayerInstance.ready:
+		yield(PlayerInstance, "ready")
+
+	append_card(PlayerInstance, Cards["BulletCard"])
+	append_card(PlayerInstance, Cards["HomingMissileCard"])
+
 
 func erase_player(player_id):
 	WorldNode.get_node("EntityContainer/" + str(player_id)).queue_free()
 	WorldNode.get_node("PlayerContainer/" + str(player_id)).queue_free()
+
+
+func append_card(Player_, Card_):
+	var CardInstance = Card_.instance()
+
+	CardInstance.setup(Player_)
+
+	Player_.add_child(CardInstance)

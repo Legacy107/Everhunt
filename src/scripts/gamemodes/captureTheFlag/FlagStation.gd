@@ -1,7 +1,7 @@
 extends Area2D
 
 
-onready var Flag = preload("res://src/components/gamemodes/capture_the_flag/Flag.tscn")
+onready var Flag = preload("res://src/components/gamemodes/captureTheFlag/Flag.tscn")
 export var team_id = 0
 export var has_flag = true
 
