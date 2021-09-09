@@ -6,8 +6,8 @@ export var card_info = {
 	"card_aims_at_mouse" : true,
 	"card_only_activate_on_click" : false,
 	"card_can_be_dropped" : false,
-	"card_charges" : 5,
-	"card_cooldown" : 0.9,
+	"card_charges" : 5000,
+	"card_cooldown" : 0.001,
 	"card_swivel_dampening" : 0.3,
 }
 

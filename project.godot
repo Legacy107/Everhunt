@@ -113,7 +113,7 @@ card_1={
 [physics]
 
 common/physics_jitter_fix=0.0
-2d/default_gravity=980
+2d/default_gravity=3000
 
 [rendering]
 

@@ -7,7 +7,7 @@ export var MOVE_SPEED = 400
 export var MAX_MOVE_SPEED = 600
 export var JUMP_FORCE = 800
 export var MAX_FALL_SPEED = 800
-export var GRAVITY = 50
+export var GRAVITY = 3000
 export var FRICTION = 100
 
 
@@ -32,7 +32,7 @@ var cards = []
 
 
 var y_velo = 0
-var x_velo = 0
+var x_accel = 0
 var facing_right = true
 var double_jump = true
 
@@ -56,7 +56,7 @@ func _ready():
 		z_index = 2
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if not is_network_master():
 		return
 
@@ -69,16 +69,13 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("down"):
 		y_velo = MAX_FALL_SPEED
 
-	var x_speed = move_dir * MOVE_SPEED + x_velo
+	var x_velo = move_dir * MOVE_SPEED + x_accel
 
-	if x_speed < 0:
-		x_speed = max(x_speed, -MAX_MOVE_SPEED)
-	else:
-		x_speed = min(x_speed, MAX_MOVE_SPEED)
+	x_velo = clamp(x_velo, -MAX_MOVE_SPEED, MAX_MOVE_SPEED)
 
-	if x_speed != 0 or y_velo != 0:
+	if x_velo != 0 or y_velo != 0:
 # warning-ignore:return_value_discarded
-		move_and_slide(Vector2(x_speed, y_velo), Vector2(0, -1))
+		move_and_slide(Vector2(x_velo, y_velo), Vector2(0, -1))
 
 		player_state["position"] = position
 
@@ -101,21 +98,21 @@ func _physics_process(_delta):
 	if grounded or wall_climb:
 		double_jump = true
 
-	y_velo += GRAVITY
-	if x_velo:
-		if x_velo < 0:
-			x_velo += FRICTION
+	y_velo += GRAVITY * delta
+	if x_accel:
+		if x_accel < 0:
+			x_accel += FRICTION
 		else:
-			x_velo -= FRICTION
+			x_accel -= FRICTION
 
 	if (grounded or enable_wall_jump or double_jump) \
 		and Input.is_action_just_pressed("up"):
 		y_velo = -JUMP_FORCE
 		if enable_wall_jump:
 			if facing_right:
-				x_velo = -JUMP_FORCE
+				x_accel = -JUMP_FORCE
 			else:
-				x_velo =  JUMP_FORCE
+				x_accel =  JUMP_FORCE
 
 			enable_wall_jump = false
 			wall_climb = false

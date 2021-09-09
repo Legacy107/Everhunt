@@ -134,7 +134,7 @@ func change_physics(mode):
 
 
 func _on_touchdown(_body):
-	change_physics(MODE_RIGID)
+	change_physics(MODE_KINEMATIC)
 
 
 func _on_body_entered(body):
