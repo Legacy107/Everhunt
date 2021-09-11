@@ -13,8 +13,9 @@ Welcome to Everhunt's documentation!
 
    readme*
    guideline*
+   codeDocumentation*
    faq*
-   *
+   authors*
 
 
 

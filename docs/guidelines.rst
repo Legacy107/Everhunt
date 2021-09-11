@@ -34,7 +34,10 @@ Code structure
         ├─── :term:`components`
         ├─── :term:`scenes`
         ├─── :term:`scripts`
+        │   └─── :term:`singletons`
+        │
         └─── :term:`utils`
+            └─── :term:`resources`
 
 .. glossary::
 
@@ -87,8 +90,14 @@ Code structure
     scripts : folder
         Containing scripts controlling player, abilities, game logics, networking, etc.
 
+    singletons : folder
+        Containing singletons scripts
+
     utils : folder
         Containing helper scripts and scenes shared between multiple components.
+
+    resources : folder
+        Containing resource files
 
 
 --------------------
@@ -106,7 +115,7 @@ Checkout out GDscript
 In short:
 
 - Functions and variables: snake_case
-- Classes: camelCase
+- Classes: PascalCase
 - Constants: CONSTANT_CASE
 
 Design pattern
