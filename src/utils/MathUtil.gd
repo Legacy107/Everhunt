@@ -1,8 +1,8 @@
-extends Object
+extends Reference
 
 
-func calculate_pivot_rotation(Pivot, Target, Origin):
-	# This func calculates the Pivot rotation such that Origin's look vector points at
+static func calculate_pivot_rotation(Pivot, Target, Origin):
+	# Calculate the Pivot rotation such that Origin's look vector points at
 	# Target's global_position
 
 	# Pivot is the pivot and the object whose rotation is calculated in this func

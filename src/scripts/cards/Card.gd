@@ -39,13 +39,13 @@ var card_swivel_dampening
 
 
 onready var card_state = {
-	"card_effect_instance_id" : 0
+	"card_effect_instance_id" : 0,
 }
 
 
-func _init(card_info):
-	for variable in card_info:
-		set(variable, card_info[variable])
+func _init(card_settings):
+	for setting in card_settings:
+		set(setting, card_settings[setting])
 
 
 func _ready():
@@ -88,9 +88,13 @@ func aim_at_mouse():
 	Tween.stop(Pivot, "rotation")
 
 	Tween.interpolate_property(
-		Pivot, "rotation",
-		Pivot.rotation, MathUtil.calculate_pivot_rotation(Pivot, Mouse, Origin),
-		card_swivel_dampening, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+		Pivot,
+		"rotation",
+		Pivot.rotation,
+		MathUtil.calculate_pivot_rotation(Pivot, Mouse, Origin),
+		card_swivel_dampening,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
 	)
 
 	Tween.start()
@@ -107,7 +111,7 @@ func handle_activate_card_event(event):
 
 func handle_drop_card_event(event):
 	if event.is_action_pressed("drop") and equipped:
-		ServerHandler.synchronize_client(get_path(), "unsetup", card_state)
+		ServerHandler.synchronize_client(get_path(), "reset", card_state)
 
 
 func handle_equip_card_event(event, id):
@@ -172,19 +176,19 @@ remote func setup(_Player):
 	if not ready:
 		yield(self, "ready")
 
-	NodeUtil.reparent(self, _Player.Flip)
+	NodeUtil.reparent(self, _Player.Visual)
 	change_physics(MODE_KINEMATIC)
 	set_deferred("position", _Player.Hand.position - Handle.position)
 
-	if self.is_connected("body_entered", self, "_on_touchdown"):
-		self.disconnect("body_entered", self, "_on_touchdown")
+	if is_connected("body_entered", self, "_on_touchdown"):
+		disconnect("body_entered", self, "_on_touchdown")
 	if Area.is_connected("body_entered", self, "_on_body_entered"):
 		Area.disconnect("body_entered", self, "_on_body_entered")
 
 	unequip(card_state)
 
 
-remote func unsetup(_state):
+remote func reset(_state):
 	Player_.cards[card_id] = ""
 	card_id = -1
 
@@ -197,8 +201,9 @@ remote func unsetup(_state):
 	change_physics(MODE_RIGID)
 	set_deferred("global_position", global_position)
 	set_deferred("linear_velocity", Vector2(0, 0))
+
 # warning-ignore:return_value_discarded
-	self.connect("body_entered", self, "_on_touchdown")
+	connect("body_entered", self, "_on_touchdown")
 	Area.connect("body_entered", self, "_on_body_entered")
 
 	unequip(card_state)
@@ -226,6 +231,6 @@ remote func activate_card(_state):
 	CoolDownDebounce.start()
 
 	if card_charges <= 0:
-		unsetup(card_state)
+		reset(card_state)
 		yield(get_tree().create_timer(4), "timeout")
 		queue_free()

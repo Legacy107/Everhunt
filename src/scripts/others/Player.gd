@@ -3,11 +3,11 @@ class_name Player
 extends KinematicBody2D
 
 
+var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 export var MOVE_SPEED = 400
 export var MAX_MOVE_SPEED = 600
 export var JUMP_FORCE = 800
 export var MAX_FALL_SPEED = 800
-export var GRAVITY = 3000
 export var FRICTION = 100
 
 
@@ -17,8 +17,8 @@ onready var NodeUtil = preload("res://src/utils/NodeUtil.gd").new()
 onready var Container = get_node("/root/Game/World/EntityContainer/" + name)
 
 
-onready var Flip = $Flip
-onready var Hand = $Flip/Hand
+onready var Visual = $Visual
+onready var Hand = $Visual/Hand
 onready var Mouse = $Mouse
 onready var Camera = $Camera2D
 onready var AnimationPlayer = $AnimationPlayer
@@ -156,9 +156,9 @@ func _physics_process(delta):
 
 func flip():
 	if facing_right:
-		Flip.scale.x = 1
+		Visual.scale.x = 1
 	else:
-		Flip.scale.x = -1
+		Visual.scale.x = -1
 
 	player_state["facing_right"] = facing_right
 
@@ -170,9 +170,9 @@ remote func update_player_state(state):
 		position = state["position"]
 
 		if state["facing_right"]:
-			Flip.scale.x = 1
+			Visual.scale.x = 1
 		else:
-			Flip.scale.x = -1
+			Visual.scale.x = -1
 
 		NodeUtil.play_animation(AnimationPlayer, state["animation"])
 

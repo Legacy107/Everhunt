@@ -1,7 +1,7 @@
 extends Card
 
 
-export var card_info = {
+export var card_settings = {
 	"CardEffect" : preload("res://src/components/cardEffects/HomingMissile.tscn"),
 	"card_aims_at_mouse" : true,
 	"card_only_activate_on_click" : false,
@@ -12,7 +12,7 @@ export var card_info = {
 }
 
 
-func _init().(card_info):
+func _init().(card_settings):
 	pass
 
 

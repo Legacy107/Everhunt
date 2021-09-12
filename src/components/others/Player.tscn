@@ -12,7 +12,7 @@ length = 0.25
 loop = true
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Flip/Sprite:region_rect")
+tracks/0/path = NodePath("Visual/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -26,7 +26,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Flip/Sprite:region_rect")
+tracks/0/path = NodePath("Visual/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -41,7 +41,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Flip/Sprite:region_rect")
+tracks/0/path = NodePath("Visual/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -55,7 +55,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=5]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Flip/Sprite:region_rect")
+tracks/0/path = NodePath("Visual/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -72,7 +72,7 @@ length = 0.55
 loop = true
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Flip/Sprite:region_rect")
+tracks/0/path = NodePath("Visual/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -88,7 +88,7 @@ tracks/0/keys = {
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Flip/Sprite:region_rect")
+tracks/0/path = NodePath("Visual/Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -109,18 +109,18 @@ script = ExtResource( 3 )
 position = Vector2( 0, -4.25 )
 shape = SubResource( 1 )
 
-[node name="Flip" type="Position2D" parent="."]
+[node name="Visual" type="Position2D" parent="."]
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Sprite" type="Sprite" parent="Flip"]
+[node name="Sprite" type="Sprite" parent="Visual"]
 position = Vector2( 0, -7.65838 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 150, 32, 32 )
 
-[node name="Hand" type="Position2D" parent="Flip"]
+[node name="Hand" type="Position2D" parent="Visual"]
 position = Vector2( 11.2568, 1.98649 )
 
 [node name="Mouse" type="Position2D" parent="."]

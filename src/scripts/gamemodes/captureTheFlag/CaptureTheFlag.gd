@@ -12,7 +12,9 @@ func _init().(3):
 
 func setup():
 	.setup()
+
 	var flag_station_instances = [FlagStation.instance(), FlagStation.instance()]
+
 	for id in flag_station_instances.size():
 		flag_station_instances[id].setup(id)
 		flag_station_instances[id].global_position = flag_positions[id]

@@ -108,13 +108,12 @@ remote func return_disconnected_player_team_id(s_player_id):
 
 func append_player(player_id, team_id):
 	var NodeInstance = Node.instance()
+	var PlayerInstance = Player.instance()
 
 	NodeInstance.set_network_master(player_id)
 	NodeInstance.set_name(str(player_id))
 
 	WorldNode.get_node("EntityContainer").add_child(NodeInstance)
-
-	var PlayerInstance = Player.instance()
 
 	PlayerInstance.set_network_master(player_id)
 	PlayerInstance.set_name(str(player_id))

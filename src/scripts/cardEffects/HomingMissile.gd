@@ -1,8 +1,8 @@
 extends Area2D
 
 
-var MAX_SPEED = 150
-var MAX_FORCE = 100
+export var MAX_SPEED = 150
+export var MAX_FORCE = 100
 
 
 var acceleration = Vector2()
@@ -10,7 +10,7 @@ var velocity = Vector2()
 
 
 onready var homing_missile_state = {
-	"position" : position
+	"position" : position,
 }
 
 
@@ -36,14 +36,18 @@ func _physics_process(delta):
 
 	homing_missile_state["position"] = position
 
-	ServerHandler.synchronize_unreliable(get_path(),
-		"update_homing_missile_state", homing_missile_state
+	ServerHandler.synchronize_unreliable(
+		get_path(),
+		"update_homing_missile_state",
+		homing_missile_state
 	)
 
 
 func _on_body_entered(_body):
-	ServerHandler.synchronize(get_path(),
-		"queue_free_homing_missile", homing_missile_state
+	ServerHandler.synchronize(
+		get_path(),
+		"queue_free_homing_missile",
+		homing_missile_state
 	)
 
 	queue_free()
