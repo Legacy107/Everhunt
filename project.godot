@@ -12,7 +12,12 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "CTFFlag",
 "language": "GDScript",
-"path": "res://src/scripts/gamemodes/CaptureTheFlag/Flag.gd"
+"path": "res://src/scripts/gamemodes/captureTheFlag/Flag.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Card",
+"language": "GDScript",
+"path": "res://src/scripts/cards/Card.gd"
 }, {
 "base": "Node",
 "class": "Gamemode",
@@ -27,10 +32,11 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://src/scripts/Player.gd"
+"path": "res://src/scripts/others/Player.gd"
 } ]
 _global_script_class_icons={
 "CTFFlag": "",
+"Card": "",
 "Gamemode": "",
 "MapInfo": "",
 "Player": ""
@@ -38,15 +44,14 @@ _global_script_class_icons={
 
 [application]
 
-config/name="EHC"
+config/name="Everhunt"
 run/main_scene="res://src/scenes/Game.tscn"
 config/icon="res://assets/images/icon.png"
 
 [autoload]
 
-GameEvent="*res://src/scripts/singletons/GameEvent.gd"
 ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
-EntityHandler="*res://src/scripts/singletons/EntityHandler.gd"
+GameEvent="*res://src/scripts/singletons/GameEvent.gd"
 
 [editor_plugins]
 
@@ -83,12 +88,17 @@ activate={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
-ability_1={
+drop={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
+ ]
+}
+card_0={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
  ]
 }
-ability_2={
+card_1={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
  ]
@@ -103,6 +113,7 @@ ability_2={
 [physics]
 
 common/physics_jitter_fix=0.0
+2d/default_gravity=3000
 
 [rendering]
 

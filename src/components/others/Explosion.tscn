@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/scripts/Explosion.gd" type="Script" id=1]
+[ext_resource path="res://src/scripts/others/Explosion.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/explosion-6.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 90, 20 )
+extents = Vector2( 50, 50 )
 
 [sub_resource type="CanvasItemMaterial" id=2]
 particles_animation = true
@@ -48,9 +48,10 @@ anim_speed = 1.0
 
 [node name="Explosion" type="Area2D"]
 z_index = 3
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 20 )
 shape = SubResource( 1 )
 
 [node name="Explosion" type="Particles2D" parent="."]
@@ -61,8 +62,9 @@ one_shot = true
 speed_scale = 2.0
 explosiveness = 0.8
 randomness = 0.3
+visibility_rect = Rect2( -1000, -100, 2000, 200 )
 process_material = SubResource( 7 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 
-[connection signal="body_entered" from="." to="Explosion" method="_on_Explosion_body_entered"]
+[connection signal="body_entered" from="." to="Explosion" method="_on_body_entered"]
