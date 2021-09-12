@@ -1,7 +1,7 @@
 extends Reference
 
 
-func reparent(child, new_parent):
+static func reparent(child, new_parent):
 	var old_parent = child.get_parent()
 
 	# Use call_deferred to avoid race conditions
@@ -10,9 +10,8 @@ func reparent(child, new_parent):
 	child.call_deferred("set_owner", new_parent)
 
 
-func play_animation(AnimationPlayer_, animation, replay=false):
-	# Play animation from an AnimationPlayer or AnimatedSprite
-
+# Play animation from an AnimationPlayer or AnimatedSprite
+static func play_animation(AnimationPlayer_, animation, replay=false):
 	var current_animation = "current_animation" \
 		if AnimationPlayer_ is AnimationPlayer \
 		else "animation"
