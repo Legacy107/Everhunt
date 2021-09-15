@@ -137,3 +137,30 @@ This class contains global signals that can be emitted and connected by any node
             **Return type**
 
             `float <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#float>`_
+
+
+--------------------
+
+
+:guilabel:`MapInfo`
+===================
+
+- **Inherits:** `Resource <https://docs.godotengine.org/en/stable/classes/class_resource.html>`_
+- **Inherited by:** None
+
++--------------------+---------+
+| Attributes         | Methods |
++====================+=========+
+| CTF_flag_positions |         |
++--------------------+---------+
+
+
+.. topic:: Attributes
+
+    .. glossary::
+        CTF_flag_positions
+            [CTF] The postions of flag stations.
+
+            **Type**
+
+            Array(`Vector2 <https://docs.godotengine.org/en/stable/classes/class_vector2.html>`_)
