@@ -126,7 +126,7 @@ position = Vector2( 11.2568, 1.98649 )
 [node name="Mouse" type="Position2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 0.4, 0.4 )
 smoothing_enabled = true
 smoothing_speed = 10.0
 

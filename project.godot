@@ -294,6 +294,7 @@ card_1={
 2d_physics/layer_1="Foreground"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="GamemodeEntities"
+2d_physics/layer_4="Entities"
 
 [physics]
 
