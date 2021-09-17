@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-CTF_flag_positions = [ Vector2( 288, 496 ), Vector2( 1440, 496 ) ]
+CTF_flag_positions = [ Vector2( -816, 1112 ), Vector2( 816, 1112 ) ]
