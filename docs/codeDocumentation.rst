@@ -6,5 +6,5 @@ Code documentation
     :caption: Contents:
     :glob:
 
-    flow*
+    flows*
     references*

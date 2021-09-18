@@ -57,7 +57,7 @@ Code structure
         Containing Godot plugins.
 
     assets : folder
-        Containing assets including images, sprites, sfx.
+        Containing assets such as images, sprites, sfx.
 
     images : folder
         Containing images that are not sprites such as logos, thumbnails, covers, etc.
@@ -69,13 +69,13 @@ Code structure
         Containing game sprites.
 
     tileset : folder
-        Containing files relating to tileset such as .tres files.
+        Containing files related to tileset such as .tres files.
 
     docs : folder
         Containing documentation files.
     
     src : folder
-        Containing source code including scripts and scenes.
+        Containing source codes such as scripts and scenes.
 
     main.tscn : file
         The master scene. In charge of switching between different scenes.
@@ -88,10 +88,10 @@ Code structure
         Containing all primary scenes such as the HUD and match maps.
 
     scripts : folder
-        Containing scripts controlling player, abilities, game logics, networking, etc.
+        Containing scripts that control players, abilities, game logics, networking, etc.
 
     singletons : folder
-        Containing singletons scripts
+        Containing singleton scripts
 
     utils : folder
         Containing helper scripts and scenes shared between multiple components.

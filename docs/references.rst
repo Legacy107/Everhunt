@@ -32,21 +32,21 @@ This class contains global signals that can be emitted and connected by any node
 
     .. glossary::
         CTF_capture_flag
-            [CTF] Emitted when a team capture the enemy's flag.
+            [CTF] Emitted when a team captures the enemy's flag.
 
             **Parameters**
 
             - team_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
 
         CTF_return_flag
-            [CTF] Emitted when a flag is returned to its station.
+            [CTF] Emitted when a flag is returned to its team's station.
 
             **Parameters**
 
             - team_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
 
         increase_score
-            Emitted when a team score points.
+            Emitted when a team scores.
 
             **Parameters**
 
@@ -123,16 +123,20 @@ This class contains global signals that can be emitted and connected by any node
 
             **Parameters**
 
-            - Pivot (`Position2D <https://docs.godotengine.org/en/stable/classes/class_position2d.html>`_) –
+            - Pivot (inherits `Node2D <https://docs.godotengine.org/en/stable/classes/class_node2d.html>`_) –
               The pivot and the object (as a child of the pivot) whose rotation is calculated.
-            - Target (`Position2D <https://docs.godotengine.org/en/stable/classes/class_position2d.html>`_) –
-              The target that the Origin wants to point at.
-            - Origin (`Position2D <https://docs.godotengine.org/en/stable/classes/class_position2d.html>`_) –
+            - Target (inherits `Node2D <https://docs.godotengine.org/en/stable/classes/class_node2d.html>`_) –
+              The target that the Origin's look vector wants to point at.
+            - Origin (inherits `Node2D <https://docs.godotengine.org/en/stable/classes/class_node2d.html>`_) –
               The origin of the object whose rotation is calculated.
+
+            .. note::
+
+              The Origin **must** be a direct child of the Pivot.
 
             **Returns**
 
-            The Pivot's rotation angle in radian.
+            The Pivot's rotation in radian.
 
             **Return type**
 
@@ -159,7 +163,7 @@ This class contains global signals that can be emitted and connected by any node
 
     .. glossary::
         CTF_flag_positions
-            [CTF] The postions of flag stations.
+            [CTF] The positions of flag stations.
 
             **Type**
 
