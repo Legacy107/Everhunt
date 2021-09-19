@@ -1,7 +1,7 @@
 Guidelines
 ==========
 
-This is the general guideline for contributing to :doc:`Everhunt <readme>` project.
+This is the general guideline for contributing to the :doc:`Everhunt <readme>` project.
 
 .. contents:: Table of Contents
 
@@ -16,56 +16,68 @@ Code structure
 
     root
     │    :term:`.gitignore`
-    │    :term:`LINSENCE.md`
+    │    :term:`LICENSE.md`
     │    :term:`README.rst`
+    |    :term:`project.godot`
     │
     ├─── :term:`addons`
     ├─── :term:`assets`
     │   ├─── :term:`images`
     │   ├─── :term:`sfx`
-    │   └─── :term:`sprites`
+    │   ├─── :term:`sprites`
+    │   └─── :term:`tileset`
+    |
     ├─── :term:`docs`
     └─── :term:`src`
-        │    :term:`main.tscn`
+        │    :term:`Main.tscn`
         │
         ├─── :term:`components`
         ├─── :term:`scenes`
         ├─── :term:`scripts`
+        │   └─── :term:`singletons`
+        │
         └─── :term:`utils`
+            └─── :term:`resources`
 
 .. glossary::
 
     .gitignore : file
-        Containing file and directory that is ignored by git.
+        Containing files and directories ignored by git.
 
-    LINSENCE.md : file
-        Containing lincense details of the game.
+    LICENSE.md : file
+        Containing license details of the game.
 
     README.rst : file
-        Containing general infomation about the game.
+        Containing general information about the game.
+
+    project.godot : file
+        Project settings.
 
     addons : folder
         Containing Godot plugins.
 
     assets : folder
-        Containing assets including images, sprites, sfx.
+        Containing assets such as images, sprites, sfx.
 
     images : folder
-        Containing images that are not sprites such as logo, thumbnail, cover, etc.
+        Containing images that are not sprites such as logos, thumbnails, covers, etc.
     
     sfx : folder
-        Containing sounds and musics file.
+        Containing sound and music files.
 
     sprites : folder
         Containing game sprites.
+
+    tileset : folder
+        Containing files related to tileset such as .tres files.
 
     docs : folder
         Containing documentation files.
     
     src : folder
-        Containing soucrce code including scripts and scenes.
+        Containing source codes such as scripts and scenes.
 
-    main.tscn : file
+    Main.tscn : file
         The master scene. In charge of switching between different scenes.
 
     components : folder
@@ -73,13 +85,19 @@ Code structure
         to abilities, particles, etc.
 
     scenes : folder
-        Containing all primary scenes such as HUD and match maps.
+        Containing all primary scenes such as the HUD and match maps.
 
     scripts : folder
-        Containing scritps controlling player, abilities, game logic, networking, etc.
+        Containing scripts that control players, abilities, game logics, networking, etc.
+
+    singletons : folder
+        Containing singleton scripts
 
     utils : folder
         Containing helper scripts and scenes shared between multiple components.
+
+    resources : folder
+        Containing resource files
 
 
 --------------------
@@ -97,7 +115,7 @@ Checkout out GDscript
 In short:
 
 - Functions and variables: snake_case
-- Classes: camelCase
+- Classes: PascalCase
 - Constants: CONSTANT_CASE
 
 Design pattern
@@ -191,20 +209,20 @@ All pull requests must follow the below format:
         Title of the pull request must be short and start with the task or issue code
         (EH-x for task, #x for issue).
 
-    :Descirption:
+    :Description:
         Describe all changes that have been done in bullet list.
         Include screenshots and issue references if needed.
 
     :Tag:
-        Attach appropriate tag to the pull request from the tags list.
+        Attach the appropriate tag to the pull request from the tags list.
 
     :Review:
-        All pull requests to merge into main branch need at least 1 review.
-        Remember to request reviewers when create a new pull request.
+        All pull requests to merge into the main branch need at least 1 review.
+        Remember to request reviewers when creating a new pull request.
 
 .. note::
 
-    Pull request should be squashed before being merged so that the project’s history stays easy to browse.
+    Pull requests should be squashed before being merged so that the project’s history stays easy to browse.
 
 
 --------------------
@@ -214,3 +232,5 @@ Art style
 ---------
 
 **TODO**
+
+
