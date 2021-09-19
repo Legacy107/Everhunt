@@ -119,7 +119,7 @@ This class contains global signals that can be emitted and connected by any node
 
     .. glossary::
         calculate_pivot_rotation
-            Calculates the Pivot rotation such that Origin's look vector points at Target's global_position.
+            Calculates the Pivot's rotation such that Origin's look vector points at Target's global_position.
 
             **Parameters**
 
