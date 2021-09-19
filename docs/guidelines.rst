@@ -29,7 +29,7 @@ Code structure
     |
     ├─── :term:`docs`
     └─── :term:`src`
-        │    :term:`main.tscn`
+        │    :term:`Main.tscn`
         │
         ├─── :term:`components`
         ├─── :term:`scenes`
@@ -77,7 +77,7 @@ Code structure
     src : folder
         Containing source codes such as scripts and scenes.
 
-    main.tscn : file
+    Main.tscn : file
         The master scene. In charge of switching between different scenes.
 
     components : folder

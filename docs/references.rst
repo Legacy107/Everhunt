@@ -126,13 +126,13 @@ This class contains global signals that can be emitted and connected by any node
             - Pivot (inherits `Node2D <https://docs.godotengine.org/en/stable/classes/class_node2d.html>`_) –
               The pivot and the object (as a child of the pivot) whose rotation is calculated.
             - Target (inherits `Node2D <https://docs.godotengine.org/en/stable/classes/class_node2d.html>`_) –
-              The target that the Origin's look vector wants to point at.
+              The target that Origin's look vector wants to point at.
             - Origin (inherits `Node2D <https://docs.godotengine.org/en/stable/classes/class_node2d.html>`_) –
               The origin of the object whose rotation is calculated.
 
             .. note::
 
-              The Origin **must** be a direct child of the Pivot.
+              Origin **must** be a direct child of Pivot.
 
             **Returns**
 
