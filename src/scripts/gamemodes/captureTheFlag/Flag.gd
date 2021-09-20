@@ -1,11 +1,13 @@
-extends RigidBody2D
-
 class_name CTFFlag
+
+extends RigidBody2D
 
 
 onready var NodeUtil = preload("res://src/utils/NodeUtil.gd").new()
 onready var BigFlag = $BigFlag
 onready var SmallFlag = $SmallFlag
+
+
 export var team_id = 0
 export var recapturable = false
 

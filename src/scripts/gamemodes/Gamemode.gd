@@ -1,5 +1,6 @@
-extends Node
 class_name Gamemode
+
+extends Node
 
 
 var current_scores = [0, 0]
