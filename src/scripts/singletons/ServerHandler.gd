@@ -132,6 +132,7 @@ func append_player(player_id, team_id):
 func erase_player(player_id):
 	WorldNode.get_node("EntityContainer/" + str(player_id)).queue_free()
 	WorldNode.get_node("PlayerContainer/" + str(player_id)).queue_free()
+	GameEvent.emit_signal("player_disconnected", player_id)
 
 
 func append_card(Player_, Card_):

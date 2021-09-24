@@ -50,8 +50,8 @@ config/icon="res://assets/images/icon.png"
 
 [autoload]
 
-ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
 GameEvent="*res://src/scripts/singletons/GameEvent.gd"
+ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
 
 [editor_plugins]
 
