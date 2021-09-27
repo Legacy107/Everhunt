@@ -66,13 +66,30 @@ script = ExtResource( 3 )
 angle_to = 360
 color = Color( 0.372549, 0.647059, 0.819608, 1 )
 
-[node name="MarkerContainer" type="Control" parent="Margin"]
+[node name="ObjectiveMarkerContainer" type="Control" parent="Margin"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 227.0
 margin_bottom = 123.0
 
-[node name="PlayerMarker" type="ColorRect" parent="Margin/MarkerContainer"]
+[node name="ObjectiveMarker" type="ColorRect" parent="Margin/ObjectiveMarkerContainer"]
+visible = false
+margin_right = 10.0
+margin_bottom = 10.0
+rect_rotation = 45.0
+rect_pivot_offset = Vector2( 5, 5 )
+color = Color( 0.662745, 0.203922, 0.847059, 0.741176 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerMarkerContainer" type="Control" parent="Margin"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 227.0
+margin_bottom = 123.0
+
+[node name="PlayerMarker" type="ColorRect" parent="Margin/PlayerMarkerContainer"]
 visible = false
 margin_right = 6.0
 margin_bottom = 6.0
@@ -81,13 +98,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AllyMarker" type="ColorRect" parent="Margin/MarkerContainer"]
+[node name="AllyMarker" type="ColorRect" parent="Margin/PlayerMarkerContainer"]
 visible = false
 margin_right = 6.0
 margin_bottom = 6.0
 color = Color( 0.133333, 0.717647, 0.419608, 1 )
 
-[node name="EnemyMarker" type="ColorRect" parent="Margin/MarkerContainer"]
+[node name="EnemyMarker" type="ColorRect" parent="Margin/PlayerMarkerContainer"]
 visible = false
 margin_right = 6.0
 margin_bottom = 6.0

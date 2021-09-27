@@ -229,7 +229,9 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=44]
 
-[node name="Flag" type="RigidBody2D"]
+[node name="Flag" type="RigidBody2D" groups=[
+"Objective",
+]]
 collision_layer = 4
 mode = 3
 contacts_reported = 10

@@ -20,7 +20,6 @@ func _on_round_setup(winning_score):
 
 func _on_increase_score(_team_id, score):
 	if _team_id == team_id:
-		print('a')
 		UpdateTween.interpolate_property(
 			self,
 			"value",
