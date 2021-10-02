@@ -14,7 +14,6 @@ __meta__ = {
 }
 
 [node name="MinimapContainer" parent="Control" instance=ExtResource( 1 )]
-zoom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 anchor_left = 0.5

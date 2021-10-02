@@ -1,7 +1,7 @@
 extends Node
 
 
-export var SINGLEPLAYER = true
+export var SINGLEPLAYER = false
 
 
 var Player = preload("res://src/components/others/Player.tscn")
@@ -12,7 +12,7 @@ var Cards = {
 }
 
 
-onready var WorldNode = get_node("/root/Game/World")
+var WorldNode
 
 
 var network = NetworkedMultiplayerENet.new()
@@ -24,7 +24,9 @@ var unique_id = 0
 var player_team_ids = {}
 
 
-func _ready():
+func connect_server():
+	WorldNode = get_node("/root/Game/World")
+
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
 	unique_id = get_tree().get_network_unique_id()

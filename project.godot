@@ -33,25 +33,32 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://src/scripts/others/Player.gd"
+}, {
+"base": "Resource",
+"class": "SceneList",
+"language": "GDScript",
+"path": "res://src/utils/resources/SceneList.gd"
 } ]
 _global_script_class_icons={
 "CTFFlag": "",
 "Card": "",
 "Gamemode": "",
 "MapInfo": "",
-"Player": ""
+"Player": "",
+"SceneList": ""
 }
 
 [application]
 
 config/name="Everhunt"
-run/main_scene="res://src/scenes/Game.tscn"
+run/main_scene="res://src/scenes/Menu.tscn"
 config/icon="res://assets/images/icon.png"
 
 [autoload]
 
 GameEvent="*res://src/scripts/singletons/GameEvent.gd"
 ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
+SceneChanger="*res://src/scenes/SceneChanger.tscn"
 
 [editor_plugins]
 
