@@ -57,7 +57,6 @@ config/icon="res://assets/images/icon.png"
 [autoload]
 
 GameEvent="*res://src/scripts/singletons/GameEvent.gd"
-ServerEvent="*res://src/scripts/singletons/ServerEvent.gd"
 ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
 SceneChanger="*res://src/scenes/SceneChanger.tscn"
 

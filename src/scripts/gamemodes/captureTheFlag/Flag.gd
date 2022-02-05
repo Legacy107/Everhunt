@@ -20,9 +20,9 @@ var player_id = -1
 
 func _ready():
 # warning-ignore:return_value_discarded
-	ServerEvent.connect("player_disconnected", self, "_on_player_disconnected")
+	GameEvent.connect("player_disconnected", self, "_on_player_disconnected")
 # warning-ignore:return_value_discarded
-	ServerEvent.connect("player_erased", self, "_on_player_erased")
+	GameEvent.connect("player_erased", self, "_on_player_erased")
 
 	NodeUtil.play_animation(BigFlag, "idle")
 	NodeUtil.play_animation(SmallFlag, "idle")
