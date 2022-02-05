@@ -2,10 +2,6 @@ extends Node
 
 
 # warning-ignore:unused_signal
-signal player_disconnected(player_id)
-
-
-# warning-ignore:unused_signal
 signal increase_score(team_id, score)
 # warning-ignore:unused_signal
 signal round_setup(winning_score)

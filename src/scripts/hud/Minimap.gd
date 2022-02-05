@@ -23,7 +23,7 @@ var objective_markers = []
 func _ready():
 	SightIndicator.radius = SIGHT_RADIUS / ZOOM
 # warning-ignore:return_value_discarded
-	GameEvent.connect("player_disconnected", self, "_on_player_removed")
+	ServerEvent.connect("player_disconnected", self, "_on_player_disconnected")
 
 	objective_markers.resize(NUMBER_OBJECTIVE)
 	for id in range(NUMBER_OBJECTIVE):
@@ -125,7 +125,7 @@ func add_sight_indicator(key, SightIndicator_):
 	sight_indicators[key] = SightIndicator_
 
 
-func _on_player_removed(key):
+func _on_player_disconnected(key):
 	key = str(key)
 	delete_buffer.append(key)
 
