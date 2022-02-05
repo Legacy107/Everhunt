@@ -17,7 +17,7 @@ Installation
 
 .. code:: sh
 
-    $ git clone github.com/Legacy107/Everhunt.git
+    $ git clone https://github.com/Legacy107/Everhunt.git
 
 - Web
 - Mobile
@@ -26,7 +26,7 @@ Installation
 Contribute
 ----------
 
-- `Issue Tracker <https://github.com/Legacy107/Everhunt/issues/>`_ 
+- `Issue Tracker <https://github.com/Legacy107/Everhunt/issues/>`_
 - `Source Code <https://github.com/Legacy107/Everhunt/>`_
 - Check out :doc:`guidelines` before making any contribution
 
