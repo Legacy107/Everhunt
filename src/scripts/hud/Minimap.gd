@@ -1,5 +1,6 @@
 extends MarginContainer
 
+
 export var ZOOM = 8
 export var SIGHT_RADIUS = 400
 export var NUMBER_OBJECTIVE = 3

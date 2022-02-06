@@ -2,4 +2,4 @@ extends Node
 
 
 func _ready():
-	ServerHandler.connect_server()
+	ServerHandler.connect2server()

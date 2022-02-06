@@ -58,7 +58,7 @@ config/icon="res://assets/images/icon.png"
 
 GameEvent="*res://src/scripts/singletons/GameEvent.gd"
 ServerHandler="*res://src/scripts/singletons/ServerHandler.gd"
-SceneChanger="*res://src/scenes/SceneChanger.tscn"
+SceneHandler="*res://src/scenes/SceneHandler.tscn"
 
 [editor_plugins]
 

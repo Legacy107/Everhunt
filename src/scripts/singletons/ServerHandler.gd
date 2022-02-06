@@ -24,8 +24,12 @@ var unique_id = 0
 var player_team_ids = {}
 
 
-func connect_server():
+func connect2server():
 	WorldNode = get_node("/root/Game/World")
+
+	if SINGLEPLAYER:
+		ip = "localhost"
+		port = 1909
 
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
@@ -36,6 +40,14 @@ func connect_server():
 
 	if SINGLEPLAYER:
 		append_player(unique_id, 0)
+
+
+func disconnect_from_server():
+	network.disconnect("connection_failed", self, "_connection_failed")
+	network.disconnect("connection_succeeded", self, "_connection_succeeded")
+
+	get_tree().set_network_peer(null)
+	network.close_connection()
 
 
 func _connection_failed():
