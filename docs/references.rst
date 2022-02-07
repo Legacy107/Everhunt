@@ -19,31 +19,53 @@ References
 This class contains global signals that can be emitted and connected by any node.
 
 
-+---------------------------+---------+
-| Signals                   | Methods |
-+===========================+=========+
-|| :term:`CTF_capture_flag` ||        |
-|| :term:`CTF_return_flag`  ||        |
-|| :term:`increase_score`   ||        |
-+---------------------------+---------+
++------------------------------+---------+
+| Signals                      | Methods |
++==============================+=========+
+|| :term:`player_connected`    ||        |
+|| :term:`player_disconnected` ||        |
+|| :term:`player_appended`     ||        |
+|| :term:`player_erased`       ||        |
+|| :term:`increase_score`      ||        |
+|| :term:`round_setup`         ||        |
+|| :term:`CTF_capture_flag`    ||        |
+|| :term:`CTF_return_flag`     ||        |
+|| :term:`CTF_drop_flag`       ||        |
++------------------------------+---------+
 
 
 .. topic:: Signals
 
     .. glossary::
-        CTF_capture_flag
-            [CTF] Emitted when a team captures the enemy's flag.
+        player_connected
+            Emitted right after a player connects.
 
             **Parameters**
 
+            - player_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
             - team_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
 
-        CTF_return_flag
-            [CTF] Emitted when a flag is returned to its team's station.
+        player_disconnected
+            Emitted right before a player disconnects.
 
             **Parameters**
 
+            - player_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
+
+        player_appended
+            Emitted right after a player is appended.
+
+            **Parameters**
+
+            - player_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
             - team_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
+
+        player_erased
+            Emitted right before a player is erased.
+
+            **Parameters**
+
+            - player_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
 
         increase_score
             Emitted when a team scores.
@@ -52,6 +74,35 @@ This class contains global signals that can be emitted and connected by any node
 
             - team_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
             - score (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
+
+        round_setup
+            Emitted when a round is set up.
+
+            **Parameters**
+
+            - winning_score (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
+
+		CTF_capture_flag
+            [CTF] Emitted when a team captures the enemy team's flag.
+
+            **Parameters**
+
+            - team_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
+
+        CTF_return_flag
+            [CTF] Emitted when a flag is returned to its team's flag station.
+
+            **Parameters**
+
+            - team_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
+
+        CTF_drop_flag
+            [CTF] Emitted when a team's flag is dropped.
+
+            **Parameters**
+
+            - team_id (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
+            - flag_global_position (`vector2 <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#vector2>`_)
 
 
 --------------------
