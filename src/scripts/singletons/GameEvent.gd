@@ -25,4 +25,4 @@ signal CTF_capture_flag(team_id)
 # warning-ignore:unused_signal
 signal CTF_return_flag(team_id)
 # warning-ignore:unused_signal
-signal CTF_drop_flag(team_id)
+signal CTF_drop_flag(team_id, flag_global_position)
