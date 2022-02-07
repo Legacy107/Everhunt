@@ -21,6 +21,8 @@ onready var WallClimbDebounce = $WallClimbDebounce
 
 var ready = false
 var team_id = 0
+
+# The team_id of the CTFFlag the Player is carrying. Value of -1 indicates there is no flag
 var flag_team_id = -1
 
 var cards_size = 2
@@ -163,8 +165,7 @@ func flip():
 
 
 func _on_player_disconnected(player_id):
-	if player_id == int(name) and flag_team_id != -1:
-		GameEvent.emit_signal("CTF_drop_flag", flag_team_id, global_position)
+	pass
 
 
 func _on_player_erased(player_id):

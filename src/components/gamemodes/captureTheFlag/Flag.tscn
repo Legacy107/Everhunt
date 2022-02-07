@@ -275,6 +275,7 @@ script = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="SmallFlag" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 0, -24 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 19 )

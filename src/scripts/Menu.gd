@@ -5,8 +5,7 @@ var game_scene_path = load("res://src/utils/resources/SceneList.tres").game
 
 onready var IpInput = $Panel/MarginContainer/CenterContainer/IpInput
 onready var PortInput = $Panel/MarginContainer/CenterContainer/PortInput
-
-var button_pressed_debounce = true
+onready var JoinButton = $Panel/MarginContainer/CenterContainer/JoinButton
 
 
 func _ready():
@@ -15,13 +14,13 @@ func _ready():
 
 
 func _on_JoinButton_pressed():
-	if button_pressed_debounce:
-		button_pressed_debounce = false
+	if not JoinButton.disabled:
+		JoinButton.disabled = true
 
 		SceneHandler.change_scene(game_scene_path)
 		yield(SceneHandler, "scene_changed")
 
-		button_pressed_debounce = true
+		JoinButton.disabled = false
 
 
 func _on_IpInput_text_changed(new_ip):

@@ -14,7 +14,6 @@ export var recapturable = false
 func _ready():
 	NodeUtil.play_animation(BigFlag, "idle")
 	NodeUtil.play_animation(SmallFlag, "idle")
-	SmallFlag.visible = false
 
 
 func setup(_team_id):
