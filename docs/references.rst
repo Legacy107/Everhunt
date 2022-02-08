@@ -82,7 +82,7 @@ This class contains global signals that can be emitted and connected by any node
 
             - winning_score (`int <https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#int>`_)
 
-		CTF_capture_flag
+	CTF_capture_flag
             [CTF] Emitted when a team captures the enemy team's flag.
 
             **Parameters**
