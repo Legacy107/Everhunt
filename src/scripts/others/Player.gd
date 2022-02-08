@@ -164,6 +164,7 @@ func flip():
 	player_state["facing_right"] = facing_right
 
 
+# warning-ignore:unused_argument
 func _on_player_disconnected(player_id):
 	pass
 

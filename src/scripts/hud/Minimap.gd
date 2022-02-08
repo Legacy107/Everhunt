@@ -14,17 +14,20 @@ onready var AllyMarker = $Margin/PlayerMarkerContainer/AllyMarker
 onready var EnemyMarker = $Margin/PlayerMarkerContainer/EnemyMarker
 onready var ObjectiveMarker = $Margin/ObjectiveMarkerContainer/ObjectiveMarker
 
+var team_id = null
+var players = []
 var player_markers = {}
 var sight_indicators = {}
-var team_id = null
-var delete_buffer = []
 var objective_markers = []
 
 
 func _ready():
 	SightIndicator.radius = SIGHT_RADIUS / ZOOM
+
 # warning-ignore:return_value_discarded
-	GameEvent.connect("player_disconnected", self, "_on_player_disconnected")
+	GameEvent.connect("player_appended", self, "_on_player_appended")
+# warning-ignore:return_value_discarded
+	GameEvent.connect("player_erased", self, "_on_player_erased")
 
 	objective_markers.resize(NUMBER_OBJECTIVE)
 	for id in range(NUMBER_OBJECTIVE):
@@ -37,53 +40,17 @@ func _ready():
 
 
 func _process(_delta):
-	var players = get_tree().get_nodes_in_group("Player")
 	var objectives = get_tree().get_nodes_in_group("Objective")
 
-	remove_disconnected_players(players)
-	check_new_players(players)
-	update_player_markers(players)
+	update_player_markers()
 	update_sight_indicator()
 	update_objective_markers(objectives)
 
 
-func remove_disconnected_players(players):
-	for Player_ in players:
-		if delete_buffer.has(Player_.name):
-			players.erase(Player_)
-
-	delete_buffer.clear()
-
-
-func check_new_players(players):
-	for Player_ in players:
-		# Add a marker if a new player joins
-		if not (Player_.name in player_markers.keys()):
-			var Marker
-			if Player_.is_network_master():
-				Marker = PlayerMarker.duplicate()
-				team_id = Player_.team_id
-				add_sight_indicator(Player_.name, SightIndicator.duplicate())
-			elif team_id == null:
-				continue
-			elif Player_.team_id == team_id:
-				Marker = AllyMarker.duplicate()
-				add_sight_indicator(Player_.name, SightIndicator.duplicate())
-			else:
-				Marker = EnemyMarker.duplicate()
-
-			add_marker(
-				Player_.name,
-				PlayerMarkerContainer,
-				Marker,
-				player_markers
-			)
-
-
-func update_player_markers(players):
+func update_player_markers():
 	for Player_ in players:
 		if Player_.team_id != team_id:
-			if is_in_sight(players, Player_):
+			if is_in_sight(Player_):
 				player_markers[Player_.name].show()
 			else:
 				player_markers[Player_.name].hide()
@@ -95,7 +62,7 @@ func update_player_markers(players):
 		)
 
 
-func is_in_sight(players, _Player):
+func is_in_sight(_Player):
 	var is_in_sight = false
 
 	for Player_ in players:
@@ -126,17 +93,55 @@ func add_sight_indicator(key, SightIndicator_):
 	sight_indicators[key] = SightIndicator_
 
 
-func _on_player_disconnected(key):
-	key = str(key)
-	delete_buffer.append(key)
+func _on_player_appended(player_id, team_id_):
+	var _players = get_tree().get_nodes_in_group("Player")
 
-	if key in player_markers:
-		player_markers[key].queue_free()
-		player_markers.erase(key)
+	player_id = str(player_id)
 
-	if key in sight_indicators:
-		sight_indicators[key].queue_free()
-		sight_indicators.erase(key)
+	for Player_ in _players:
+		if Player_.name == player_id and not (Player_.name in player_markers.keys()):
+			var Marker
+
+			players.append(Player_)
+
+			if Player_.is_network_master():
+				Marker = PlayerMarker.duplicate()
+				team_id = team_id_
+				add_sight_indicator(Player_.name, SightIndicator.duplicate())
+			elif team_id == null:
+				continue
+			elif team_id_ == team_id:
+				Marker = AllyMarker.duplicate()
+				add_sight_indicator(Player_.name, SightIndicator.duplicate())
+			else:
+				Marker = EnemyMarker.duplicate()
+
+			add_marker(
+				Player_.name,
+				PlayerMarkerContainer,
+				Marker,
+				player_markers
+			)
+
+			break
+
+
+func _on_player_erased(player_id):
+	player_id = str(player_id)
+
+	for Player_ in players:
+		if Player_.name == player_id:
+			players.erase(Player_)
+
+			break
+
+	if player_id in player_markers:
+		player_markers[player_id].queue_free()
+		player_markers.erase(player_id)
+
+	if player_id in sight_indicators:
+		sight_indicators[player_id].queue_free()
+		sight_indicators.erase(player_id)
 
 
 func update_objective_markers(objectives):
