@@ -10,13 +10,8 @@ export var JUMP_FORCE = 800
 export var MAX_FALL_SPEED = 800
 export var FRICTION = 100
 
-
 onready var NodeUtil = preload("res://src/utils/NodeUtil.gd").new()
-
-
 onready var Container = get_node("/root/Game/World/EntityContainer/" + name)
-
-
 onready var Visual = $Visual
 onready var Hand = $Visual/Hand
 onready var Mouse = $Mouse
@@ -24,18 +19,19 @@ onready var Camera = $Camera2D
 onready var AnimationPlayer = $AnimationPlayer
 onready var WallClimbDebounce = $WallClimbDebounce
 
-
 var ready = false
 var team_id = 0
+
+# The team_id of the CTFFlag the Player is carrying. Value of -1 indicates there is no flag
+var flag_team_id = -1
+
 var cards_size = 2
 var cards = []
-
 
 var y_velo = 0
 var x_accel = 0
 var facing_right = true
 var double_jump = true
-
 
 onready var player_state = {
 	"position" : position,
@@ -46,6 +42,11 @@ onready var player_state = {
 
 
 func _ready():
+# warning-ignore:return_value_discarded
+	GameEvent.connect("player_disconnected", self, "_on_player_disconnected")
+# warning-ignore:return_value_discarded
+	GameEvent.connect("player_erased", self, "_on_player_erased")
+
 	ready = true
 
 	for _id in range (cards_size):
@@ -161,6 +162,16 @@ func flip():
 		Visual.scale.x = -1
 
 	player_state["facing_right"] = facing_right
+
+
+# warning-ignore:unused_argument
+func _on_player_disconnected(player_id):
+	pass
+
+
+func _on_player_erased(player_id):
+	if player_id == int(name) and flag_team_id != -1:
+		GameEvent.emit_signal("CTF_drop_flag", flag_team_id, global_position)
 
 
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/End (Idle).png-b330a78b3e24b5a096b058b23ee57a3b.stex"
+path="res://.import/settingsButton.png-efe4c4171b5975c5b3cd7ed3bd08b773.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Items/Checkpoints/End/End (Idle).png"
-dest_files=[ "res://.import/End (Idle).png-b330a78b3e24b5a096b058b23ee57a3b.stex" ]
+source_file="res://assets/sprites/HUD/settingsButton.png"
+dest_files=[ "res://.import/settingsButton.png-efe4c4171b5975c5b3cd7ed3bd08b773.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

@@ -100,7 +100,9 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 112, 32, 32 ), Rect2( 32, 112, 32, 32 ), Rect2( 64, 112, 32, 32 ), Rect2( 96, 112, 32, 32 ) ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 z_index = 1
 collision_layer = 2
 script = ExtResource( 3 )

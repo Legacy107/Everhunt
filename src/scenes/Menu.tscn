@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/Background/Gray.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Menu/Buttons/Play.png" type="Texture" id=2]
+[ext_resource path="res://src/scripts/Menu.gd" type="Script" id=3]
+
+[node name="Menu" type="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -139.5
+margin_top = -156.5
+margin_right = 139.5
+margin_bottom = 156.5
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 26
+custom_constants/margin_top = 16
+custom_constants/margin_left = 26
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+margin_left = 26.0
+margin_top = 16.0
+margin_right = 253.0
+margin_bottom = 297.0
+mouse_filter = 2
+custom_constants/separation = 16
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IpLabel" type="Label" parent="Panel/MarginContainer/CenterContainer"]
+margin_top = 44.0
+margin_right = 227.0
+margin_bottom = 58.0
+text = "Server IP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IpInput" type="LineEdit" parent="Panel/MarginContainer/CenterContainer"]
+margin_top = 74.0
+margin_right = 227.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 30 )
+caret_blink = true
+
+[node name="PortLabel" type="Label" parent="Panel/MarginContainer/CenterContainer"]
+margin_top = 120.0
+margin_right = 227.0
+margin_bottom = 134.0
+text = "Server Port"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PortInput" type="LineEdit" parent="Panel/MarginContainer/CenterContainer"]
+margin_top = 150.0
+margin_right = 227.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 30 )
+caret_blink = true
+
+[node name="JoinButton" type="Button" parent="Panel/MarginContainer/CenterContainer"]
+margin_top = 196.0
+margin_right = 227.0
+margin_bottom = 236.0
+rect_min_size = Vector2( 80, 40 )
+mouse_default_cursor_shape = 2
+custom_constants/hseparation = 10
+action_mode = 0
+text = "JOIN"
+icon = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="text_changed" from="Panel/MarginContainer/CenterContainer/IpInput" to="." method="_on_IpInput_text_changed"]
+[connection signal="text_changed" from="Panel/MarginContainer/CenterContainer/PortInput" to="." method="_on_PortInput_text_changed"]
+[connection signal="pressed" from="Panel/MarginContainer/CenterContainer/JoinButton" to="." method="_on_JoinButton_pressed"]

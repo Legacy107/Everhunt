@@ -1,7 +1,7 @@
 extends Node
 
 
-export var SINGLEPLAYER = true
+export var SINGLEPLAYER = false
 
 
 var Player = preload("res://src/components/others/Player.tscn")
@@ -12,7 +12,7 @@ var Cards = {
 }
 
 
-onready var WorldNode = get_node("/root/Game/World")
+var WorldNode
 
 
 var network = NetworkedMultiplayerENet.new()
@@ -24,7 +24,13 @@ var unique_id = 0
 var player_team_ids = {}
 
 
-func _ready():
+func connect2server():
+	WorldNode = get_node("/root/Game/World")
+
+	if SINGLEPLAYER:
+		ip = "localhost"
+		port = 1909
+
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
 	unique_id = get_tree().get_network_unique_id()
@@ -34,6 +40,14 @@ func _ready():
 
 	if SINGLEPLAYER:
 		append_player(unique_id, 0)
+
+
+func disconnect_from_server():
+	network.disconnect("connection_failed", self, "_connection_failed")
+	network.disconnect("connection_succeeded", self, "_connection_succeeded")
+
+	get_tree().set_network_peer(null)
+	network.close_connection()
 
 
 func _connection_failed():
@@ -95,13 +109,17 @@ remote func return_player_team_ids(s_player_team_ids):
 remote func return_connected_player_team_id(s_player_id, s_team_id):
 	player_team_ids[s_player_id] = s_team_id
 
+	GameEvent.emit_signal("player_connected", s_player_id, s_team_id)
+
 	append_player(s_player_id, s_team_id)
 
 
 remote func return_disconnected_player_team_id(s_player_id):
+	GameEvent.emit_signal("player_disconnected", s_player_id)
+
 	player_team_ids.erase(s_player_id)
 
-	erase_player(s_player_id)
+	call_deferred("erase_player", s_player_id)
 
 
 
@@ -125,13 +143,17 @@ func append_player(player_id, team_id):
 	if not PlayerInstance.ready:
 		yield(PlayerInstance, "ready")
 
+	GameEvent.emit_signal("player_appended", player_id, team_id)
+
 	append_card(PlayerInstance, Cards["BulletCard"])
 	append_card(PlayerInstance, Cards["HomingMissileCard"])
 
 
 func erase_player(player_id):
-	WorldNode.get_node("EntityContainer/" + str(player_id)).queue_free()
-	WorldNode.get_node("PlayerContainer/" + str(player_id)).queue_free()
+	GameEvent.emit_signal("player_erased", player_id)
+
+	WorldNode.get_node("EntityContainer/" + str(player_id)).call_deferred("queue_free")
+	WorldNode.get_node("PlayerContainer/" + str(player_id)).call_deferred("queue_free")
 
 
 func append_card(Player_, Card_):
